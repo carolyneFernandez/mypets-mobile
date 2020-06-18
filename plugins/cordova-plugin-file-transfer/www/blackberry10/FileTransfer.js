@@ -25,7 +25,7 @@ var argscheck = require('cordova/argscheck'),
 
 
 function getBasicAuthHeader(urlString) {
-    var header = null;
+    var header =  null;
 
     if (window.btoa) {
         // parse the url using the Location object
@@ -47,8 +47,8 @@ function getBasicAuthHeader(urlString) {
             var authHeaderValue = "Basic " + window.btoa(credentials);
 
             header = {
-                name: authHeader,
-                value: authHeaderValue
+                name : authHeader,
+                value : authHeaderValue
             };
         }
     }
@@ -62,22 +62,22 @@ var idCounter = 0;
  * FileTransfer uploads a file to a remote server.
  * @constructor
  */
-var FileTransfer = function () {
+var FileTransfer = function() {
     this._id = ++idCounter;
     this.onprogress = null; // optional callback
 };
 
 /**
- * Given an absolute file path, uploads a file on the device to a remote server
- * using a multipart HTTP request.
- * @param filePath {String}           Full path of the file on the device
- * @param server {String}             URL of the server to receive the file
- * @param successCallback (Function}  Callback to be invoked when upload has completed
- * @param errorCallback {Function}    Callback to be invoked upon error
- * @param options {FileUploadOptions} Optional parameters such as file name and mimetype
- * @param trustAllHosts {Boolean} Optional trust all hosts (e.g. for self-signed certs), defaults to false
- */
-FileTransfer.prototype.upload = function (filePath, server, successCallback, errorCallback, options, trustAllHosts) {
+* Given an absolute file path, uploads a file on the device to a remote server
+* using a multipart HTTP request.
+* @param filePath {String}           Full path of the file on the device
+* @param server {String}             URL of the server to receive the file
+* @param successCallback (Function}  Callback to be invoked when upload has completed
+* @param errorCallback {Function}    Callback to be invoked upon error
+* @param options {FileUploadOptions} Optional parameters such as file name and mimetype
+* @param trustAllHosts {Boolean} Optional trust all hosts (e.g. for self-signed certs), defaults to false
+*/
+FileTransfer.prototype.upload = function(filePath, server, successCallback, errorCallback, options, trustAllHosts) {
     argscheck.checkArgs('ssFFO*', 'FileTransfer.upload', arguments);
     // check for options
     var fileKey = null;
@@ -100,7 +100,7 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
         mimeType = options.mimeType;
         headers = options.headers;
         httpMethod = options.httpMethod || "POST";
-        if (httpMethod.toUpperCase() == "PUT") {
+        if (httpMethod.toUpperCase() == "PUT"){
             httpMethod = "PUT";
         } else {
             httpMethod = "POST";
@@ -110,18 +110,19 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
         }
         if (options.params) {
             params = options.params;
-        } else {
+        }
+        else {
             params = {};
         }
     }
 
-    var fail = errorCallback && function (e) {
+    var fail = errorCallback && function(e) {
         var error = new FileTransferError(e.code, e.source, e.target, e.http_status, e.body);
         errorCallback(error);
     };
 
     var self = this;
-    var win = function (result) {
+    var win = function(result) {
         if (typeof result.lengthComputable != "undefined") {
             if (self.onprogress) {
                 self.onprogress(result);
@@ -144,7 +145,7 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
  * @param trustAllHosts {Boolean} Optional trust all hosts (e.g. for self-signed certs), defaults to false
  * @param options {FileDownloadOptions} Optional parameters such as headers
  */
-FileTransfer.prototype.download = function (source, target, successCallback, errorCallback, trustAllHosts, options) {
+FileTransfer.prototype.download = function(source, target, successCallback, errorCallback, trustAllHosts, options) {
     argscheck.checkArgs('ssFF*', 'FileTransfer.download', arguments);
     var self = this;
 
@@ -160,7 +161,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
         headers = options.headers || null;
     }
 
-    var win = function (result) {
+    var win = function(result) {
         if (typeof result.lengthComputable != "undefined") {
             if (self.onprogress) {
                 return self.onprogress(result);
@@ -170,7 +171,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
         }
     };
 
-    var fail = errorCallback && function (e) {
+    var fail = errorCallback && function(e) {
         var error = new FileTransferError(e.code, e.source, e.target, e.http_status, e.body);
         errorCallback(error);
     };
@@ -182,7 +183,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
  * Aborts the ongoing file transfer on this object. The original error
  * callback for the file transfer will be called if necessary.
  */
-FileTransfer.prototype.abort = function () {
+FileTransfer.prototype.abort = function() {
     xhrImpl.abort(null, null, [this._id]);
 };
 

@@ -58,7 +58,7 @@ function alreadyCancelled(opId) {
     return op && op.state === FileTransferOperation.CANCELLED;
 }
 
-function doUpload(upload, uploadId, filePath, server, successCallback, errorCallback) {
+function doUpload (upload, uploadId, filePath, server, successCallback, errorCallback) {
     if (alreadyCancelled(uploadId)) {
         errorCallback(new FTErr(FTErr.ABORT_ERR, nativePathToCordova(filePath), server));
         return;
@@ -140,7 +140,7 @@ function doUpload(upload, uploadId, filePath, server, successCallback, errorCall
                 target: evt.resultFile
             });
             progressEvent.lengthComputable = true;
-            successCallback(progressEvent, {keepCallback: true});
+            successCallback(progressEvent, { keepCallback: true });
         }
     );
 }
@@ -158,10 +158,10 @@ var HTTP_E_STATUS_NOT_MODIFIED = -2145844944;
 
 module.exports = {
 
-    /*
-    exec(win, fail, 'FileTransfer', 'upload',
-    [filePath, server, fileKey, fileName, mimeType, params, trustAllHosts, chunkedMode, headers, this._id, httpMethod]);
-    */
+/*
+exec(win, fail, 'FileTransfer', 'upload', 
+[filePath, server, fileKey, fileName, mimeType, params, trustAllHosts, chunkedMode, headers, this._id, httpMethod]);
+*/
     upload: function (successCallback, errorCallback, options) {
         var filePath = options[0];
         var server = options[1];
@@ -309,10 +309,10 @@ module.exports = {
         } else if (filePath.indexOf('ms-appdata:///') === 0) {
             // Handle 'ms-appdata' scheme
             filePath = filePath.replace('ms-appdata:///local', appData.localFolder.path)
-                .replace('ms-appdata:///temp', appData.temporaryFolder.path);
+                               .replace('ms-appdata:///temp', appData.temporaryFolder.path);
         } else if (filePath.indexOf('cdvfile://') === 0) {
             filePath = filePath.replace('cdvfile://localhost/persistent', appData.localFolder.path)
-                .replace('cdvfile://localhost/temporary', appData.temporaryFolder.path);
+                               .replace('cdvfile://localhost/temporary', appData.temporaryFolder.path);
         }
 
         // normalize path separators
@@ -322,80 +322,80 @@ module.exports = {
         fileTransferOps[uploadId] = new FileTransferOperation(FileTransferOperation.PENDING, null);
 
         Windows.Storage.StorageFile.getFileFromPathAsync(filePath)
-            .then(function (storageFile) {
+        .then(function (storageFile) {
 
-                if (!fileName) {
-                    fileName = storageFile.name;
+            if (!fileName) {
+                fileName = storageFile.name;
+            }
+            if (!mimeType) {
+                // use the actual content type of the file, probably this should be the default way.
+                // other platforms probably can't look this up.
+                mimeType = storageFile.contentType;
+            }
+
+            if (alreadyCancelled(uploadId)) {
+                errorCallback(new FTErr(FTErr.ABORT_ERR, nativePathToCordova(filePath), server));
+                return;
+            }
+
+            // setting request headers for uploader
+            var uploader = new Windows.Networking.BackgroundTransfer.BackgroundUploader();
+            uploader.method = httpMethod;
+            for (var header in headers) {
+                if (headers.hasOwnProperty(header)) {
+                    uploader.setRequestHeader(header, headers[header]);
                 }
-                if (!mimeType) {
-                    // use the actual content type of the file, probably this should be the default way.
-                    // other platforms probably can't look this up.
-                    mimeType = storageFile.contentType;
-                }
+            }
 
-                if (alreadyCancelled(uploadId)) {
-                    errorCallback(new FTErr(FTErr.ABORT_ERR, nativePathToCordova(filePath), server));
-                    return;
-                }
+            // create download object. This will throw an exception if URL is malformed
+            var uri = new Windows.Foundation.Uri(server);
 
-                // setting request headers for uploader
-                var uploader = new Windows.Networking.BackgroundTransfer.BackgroundUploader();
-                uploader.method = httpMethod;
-                for (var header in headers) {
-                    if (headers.hasOwnProperty(header)) {
-                        uploader.setRequestHeader(header, headers[header]);
-                    }
-                }
-
-                // create download object. This will throw an exception if URL is malformed
-                var uri = new Windows.Foundation.Uri(server);
-
-                var createUploadOperation;
-                try {
-                    if (isMultipart) {
-                        // adding params supplied to request payload
-                        var transferParts = [];
-                        for (var key in params) {
-                            // Create content part for params only if value is specified because CreateUploadAsync fails otherwise
-                            if (params.hasOwnProperty(key) && params[key] !== null && params[key] !== undefined && params[key].toString() !== "") {
-                                var contentPart = new Windows.Networking.BackgroundTransfer.BackgroundTransferContentPart();
-                                contentPart.setHeader("Content-Disposition", "form-data; name=\"" + key + "\"");
-                                contentPart.setText(params[key]);
-                                transferParts.push(contentPart);
-                            }
+            var createUploadOperation;
+            try {
+                if (isMultipart) {
+                    // adding params supplied to request payload
+                    var transferParts = [];
+                    for (var key in params) {
+                        // Create content part for params only if value is specified because CreateUploadAsync fails otherwise
+                        if (params.hasOwnProperty(key) && params[key] !== null && params[key] !== undefined && params[key].toString() !== "") {
+                            var contentPart = new Windows.Networking.BackgroundTransfer.BackgroundTransferContentPart();
+                            contentPart.setHeader("Content-Disposition", "form-data; name=\"" + key + "\"");
+                            contentPart.setText(params[key]);
+                            transferParts.push(contentPart);
                         }
-
-                        // Adding file to upload to request payload
-                        var fileToUploadPart = new Windows.Networking.BackgroundTransfer.BackgroundTransferContentPart(fileKey, fileName);
-                        fileToUploadPart.setFile(storageFile);
-                        transferParts.push(fileToUploadPart);
-
-                        createUploadOperation = uploader.createUploadAsync(uri, transferParts);
-                    } else {
-                        createUploadOperation = WinJS.Promise.wrap(uploader.createUpload(uri, storageFile));
                     }
-                } catch (e) {
-                    errorCallback(new FTErr(FTErr.INVALID_URL_ERR));
-                    return;
+
+                    // Adding file to upload to request payload
+                    var fileToUploadPart = new Windows.Networking.BackgroundTransfer.BackgroundTransferContentPart(fileKey, fileName);
+                    fileToUploadPart.setFile(storageFile);
+                    transferParts.push(fileToUploadPart);
+
+                    createUploadOperation = uploader.createUploadAsync(uri, transferParts);
+                } else {
+                    createUploadOperation = WinJS.Promise.wrap(uploader.createUpload(uri, storageFile));
                 }
+            } catch (e) {
+                errorCallback(new FTErr(FTErr.INVALID_URL_ERR));
+                return;
+            }
 
-                createUploadOperation.then(
-                    function (upload) {
-                        doUpload(upload, uploadId, filePath, server, successCallback, errorCallback);
-                    },
-                    function (err) {
-                        var errorObj = new FTErr(FTErr.INVALID_URL_ERR);
-                        errorObj.exception = err;
-                        errorCallback(errorObj);
-                    }
-                );
-            }, function (err) {
-                errorCallback(new FTErr(FTErr.FILE_NOT_FOUND_ERR, fileName, server, null, null, err));
-            });
+            createUploadOperation.then(
+                function (upload) {
+                    doUpload(upload, uploadId, filePath, server, successCallback, errorCallback);
+                },
+                function (err) {
+                    var errorObj = new FTErr(FTErr.INVALID_URL_ERR);
+                    errorObj.exception = err;
+                    errorCallback(errorObj);
+                }
+            );
+        }, function (err) {
+            errorCallback(new FTErr(FTErr.FILE_NOT_FOUND_ERR, fileName, server, null, null, err));
+        });
     },
 
     // [source, target, trustAllHosts, id, headers]
-    download: function (successCallback, errorCallback, options) {
+    download:function(successCallback, errorCallback, options) {
         var source = options[0];
         var target = options[1];
         var downloadId = options[3];
@@ -410,10 +410,10 @@ module.exports = {
         } else if (target.indexOf('ms-appdata:///') === 0) {
             // Handle 'ms-appdata' scheme
             target = target.replace('ms-appdata:///local', appData.localFolder.path)
-                .replace('ms-appdata:///temp', appData.temporaryFolder.path);
+                           .replace('ms-appdata:///temp', appData.temporaryFolder.path);
         } else if (target.indexOf('cdvfile://') === 0) {
             target = target.replace('cdvfile://localhost/persistent', appData.localFolder.path)
-                .replace('cdvfile://localhost/temporary', appData.temporaryFolder.path);
+                           .replace('cdvfile://localhost/temporary', appData.temporaryFolder.path);
         }
         target = cordovaPathToNative(target);
 
@@ -432,7 +432,7 @@ module.exports = {
         // Create internal download operation object
         fileTransferOps[downloadId] = new FileTransferOperation(FileTransferOperation.PENDING, null);
 
-        var downloadCallback = function (storageFolder) {
+        var downloadCallback = function(storageFolder) {
             storageFolder.createFileAsync(tempFileName, Windows.Storage.CreationCollisionOption.replaceExisting).then(function (storageFile) {
 
                 if (alreadyCancelled(downloadId)) {
@@ -474,16 +474,16 @@ module.exports = {
 
                     storageFile.renameAsync(fileName, Windows.Storage.CreationCollisionOption.replaceExisting).done(function () {
                         var nativeURI = storageFile.path.replace(appData.localFolder.path, 'ms-appdata:///local')
-                            .replace(appData.temporaryFolder.path, 'ms-appdata:///temp')
-                            .replace(/\\/g, '/');
+                        .replace(appData.temporaryFolder.path, 'ms-appdata:///temp')
+                        .replace(/\\/g, '/');
 
                         // Passing null as error callback here because downloaded file should exist in any case
                         // otherwise the error callback will be hit during file creation in another place
                         FileProxy.resolveLocalFileSystemURI(successCallback, null, [nativeURI]);
-                    }, function (error) {
+                    }, function(error) {
                         errorCallback(new FTErr(FTErr.FILE_NOT_FOUND_ERR, source, target, null, null, error));
                     });
-                }, function (error) {
+                }, function(error) {
 
                     var getTransferError = new WinJS.Promise(function (resolve) {
                         // Handle download error here. If download was cancelled,
@@ -517,12 +517,12 @@ module.exports = {
                         }
 
                         // Cleanup, remove incompleted file
-                        storageFile.deleteAsync().then(function () {
+                        storageFile.deleteAsync().then(function() {
                             errorCallback(fileTransferError);
                         });
                     });
 
-                }, function (evt) {
+                }, function(evt) {
 
                     var progressEvent = new ProgressEvent('progress', {
                         loaded: evt.progress.bytesReceived,
@@ -533,14 +533,14 @@ module.exports = {
                     // when totalBytesToReceive == 0, BackgroundDownloader is unable to get file length
                     progressEvent.lengthComputable = (evt.progress.bytesReceived > 0) && (evt.progress.totalBytesToReceive > 0);
 
-                    successCallback(progressEvent, {keepCallback: true});
+                    successCallback(progressEvent, { keepCallback: true });
                 });
-            }, function (error) {
+            }, function(error) {
                 errorCallback(new FTErr(FTErr.FILE_NOT_FOUND_ERR, source, target, null, null, error));
             });
         };
 
-        var fileNotFoundErrorCallback = function (error) {
+        var fileNotFoundErrorCallback = function(error) {
             errorCallback(new FTErr(FTErr.FILE_NOT_FOUND_ERR, source, target, null, null, error));
         };
 
@@ -550,7 +550,7 @@ module.exports = {
                 var parent = path.substr(0, path.lastIndexOf('\\')),
                     folderNameToCreate = path.substr(path.lastIndexOf('\\') + 1);
 
-                Windows.Storage.StorageFolder.getFolderFromPathAsync(parent).then(function (parentFolder) {
+                Windows.Storage.StorageFolder.getFolderFromPathAsync(parent).then(function(parentFolder) {
                     parentFolder.createFolderAsync(folderNameToCreate).then(downloadCallback, fileNotFoundErrorCallback);
                 }, fileNotFoundErrorCallback);
             } else {
@@ -575,4 +575,4 @@ module.exports = {
 
 };
 
-require("cordova/exec/proxy").add("FileTransfer", module.exports);
+require("cordova/exec/proxy").add("FileTransfer",module.exports);

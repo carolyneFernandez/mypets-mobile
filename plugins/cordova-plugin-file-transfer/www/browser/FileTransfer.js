@@ -42,7 +42,7 @@ function getUrlCredentials(urlString) {
 }
 
 function getBasicAuthHeader(urlString) {
-    var header = null;
+    var header =  null;
 
 
     // This is changed due to MS Windows doesn't support credentials in http uris
@@ -56,8 +56,8 @@ function getBasicAuthHeader(urlString) {
             var authHeaderValue = "Basic " + window.btoa(credentials);
 
             header = {
-                name: authHeader,
-                value: authHeaderValue
+                name : authHeader,
+                value : authHeaderValue
             };
         }
     }
@@ -66,7 +66,7 @@ function getBasicAuthHeader(urlString) {
 }
 
 function checkURL(url) {
-    return url.indexOf(' ') === -1 ? true : false;
+    return url.indexOf(' ') === -1 ?  true : false;
 }
 
 var idCounter = 0;
@@ -77,7 +77,7 @@ var transfers = {};
  * FileTransfer uploads a file to a remote server.
  * @constructor
  */
-var FileTransfer = function () {
+var FileTransfer = function() {
     this._id = ++idCounter;
     this.onprogress = null; // optional callback
 };
@@ -92,7 +92,7 @@ var FileTransfer = function () {
  * @param options {FileUploadOptions} Optional parameters such as file name and mimetype
  * @param trustAllHosts {Boolean} Optional trust all hosts (e.g. for self-signed certs), defaults to false
  */
-FileTransfer.prototype.upload = function (filePath, server, successCallback, errorCallback, options) {
+FileTransfer.prototype.upload = function(filePath, server, successCallback, errorCallback, options) {
     // check for arguments
     argscheck.checkArgs('ssFFO*', 'FileTransfer.upload', arguments);
 
@@ -126,7 +126,7 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
     var xhr = transfers[this._id] = new XMLHttpRequest();
     xhr.withCredentials = withCredentials;
 
-    var fail = errorCallback && function (code, status, response) {
+    var fail = errorCallback && function(code, status, response) {
         if (transfers[this._id]) {
             delete transfers[this._id];
         }
@@ -136,10 +136,10 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
         }
     };
 
-    window.resolveLocalFileSystemURL(filePath, function (entry) {
-        entry.file(function (file) {
+    window.resolveLocalFileSystemURL(filePath, function(entry) {
+        entry.file(function(file) {
             var reader = new FileReader();
-            reader.onloadend = function () {
+            reader.onloadend = function() {
                 var blob = new Blob([this.result], {type: mimeType});
 
                 // Prepare form data to send to server
@@ -160,7 +160,7 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
                     }
                 }
 
-                xhr.onload = function () {
+                xhr.onload = function() {
                     if (this.status === 200) {
                         var result = new FileUploadResult(); // jshint ignore:line
                         result.bytesSent = blob.size;
@@ -175,11 +175,11 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
                     }
                 };
 
-                xhr.ontimeout = function () {
+                xhr.ontimeout = function() {
                     fail(FileTransferError.CONNECTION_ERR, this.status, this.response);
                 };
 
-                xhr.onerror = function () {
+                xhr.onerror = function() {
                     fail(FileTransferError.CONNECTION_ERR, this.status, this.response);
                 };
 
@@ -202,10 +202,10 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
                 }
             };
             reader.readAsArrayBuffer(file);
-        }, function () {
+        }, function() {
             fail(FileTransferError.FILE_NOT_FOUND_ERR);
         });
-    }, function () {
+    }, function() {
         fail(FileTransferError.FILE_NOT_FOUND_ERR);
     });
 };
@@ -219,7 +219,7 @@ FileTransfer.prototype.upload = function (filePath, server, successCallback, err
  * @param trustAllHosts {Boolean} Optional trust all hosts (e.g. for self-signed certs), defaults to false
  * @param options {FileDownloadOptions} Optional parameters such as headers
  */
-FileTransfer.prototype.download = function (source, target, successCallback, errorCallback, trustAllHosts, options) {
+FileTransfer.prototype.download = function(source, target, successCallback, errorCallback, trustAllHosts, options) {
     argscheck.checkArgs('ssFF*', 'FileTransfer.download', arguments);
 
     // Check if target URL doesn't contain spaces. If contains, it should be escaped first
@@ -232,7 +232,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
     }
 
     options = options || {};
-
+    
     var headers = options.headers || {};
     var withCredentials = options.withCredentials || false;
 
@@ -245,7 +245,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
     var that = this;
     var xhr = transfers[this._id] = new XMLHttpRequest();
     xhr.withCredentials = withCredentials;
-    var fail = errorCallback && function (code, status, response) {
+    var fail = errorCallback && function(code, status, response) {
         if (transfers[that._id]) {
             delete transfers[that._id];
         }
@@ -254,7 +254,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
         if (response instanceof Blob) {
             var reader = new FileReader();
             reader.readAsText(response);
-            reader.onloadend = function (e) {
+            reader.onloadend = function(e) {
                 var error = new FileTransferError(code, source, target, status, e.target.result);
                 errorCallback(error);
             };
@@ -332,7 +332,7 @@ FileTransfer.prototype.download = function (source, target, successCallback, err
  * Aborts the ongoing file transfer on this object. The original error
  * callback for the file transfer will be called if necessary.
  */
-FileTransfer.prototype.abort = function () {
+FileTransfer.prototype.abort = function() {
     if (this instanceof FileTransfer) {
         if (transfers[this._id]) {
             transfers[this._id].abort();

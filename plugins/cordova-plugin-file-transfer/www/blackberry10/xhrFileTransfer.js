@@ -37,7 +37,7 @@ function getFileName(filePath) {
 }
 
 function checkURL(url) {
-    return url.indexOf(' ') === -1 ? true : false;
+    return url.indexOf(' ') === -1 ?  true : false;
 }
 
 module.exports = {
@@ -45,15 +45,15 @@ module.exports = {
         var id = args[0];
         if (xhr[id]) {
             xhr[id].abort();
-            if (typeof (win) === 'function') {
+            if (typeof(win) === 'function') {
                 win();
             }
-        } else if (typeof (fail) === 'function') {
+        } else if (typeof(fail) === 'function') {
             fail();
         }
     },
 
-    upload: function (win, fail, args) {
+    upload: function(win, fail, args) {
         var filePath = args[0],
             server = args[1],
             fileKey = args[2],
@@ -64,13 +64,13 @@ module.exports = {
             chunkedMode = args[7],
             headers = args[8],
             onSuccess = function (data) {
-                if (typeof (win) === 'function') {
+                if (typeof(win) === 'function') {
                     win(data);
                 }
             },
             onFail = function (code) {
                 delete xhr[fileKey];
-                if (typeof (fail) === 'function') {
+                if (typeof(fail) === 'function') {
                     fail(code);
                 }
             };
@@ -84,21 +84,21 @@ module.exports = {
             onFail(new FileTransferError(FileTransferError.ABORT_ERR, server, filePath, this.status, xhr[fileKey].response));
         };
 
-        resolve(function (entry) {
+        resolve(function(entry) {
             requestAnimationFrame(function () {
-                entry.nativeEntry.file(function (file) {
+                entry.nativeEntry.file(function(file) {
                     function uploadFile(blobFile) {
                         var fd = new FormData();
 
                         fd.append(fileKey, blobFile, fileName);
                         for (var prop in params) {
-                            if (params.hasOwnProperty(prop)) {
+                            if(params.hasOwnProperty(prop)) {
                                 fd.append(prop, params[prop]);
                             }
                         }
 
                         xhr[fileKey].open("POST", server);
-                        xhr[fileKey].onload = function (evt) {
+                        xhr[fileKey].onload = function(evt) {
                             if (xhr[fileKey].status === 200) {
                                 var result = new FileUploadResult();
                                 result.bytesSent = file.size;
@@ -112,7 +112,7 @@ module.exports = {
                                 onFail(new FileTransferError(FileTransferError.CONNECTION_ERR, server, filePath, xhr[fileKey].status, xhr[fileKey].response));
                             }
                         };
-                        xhr[fileKey].ontimeout = function (evt) {
+                        xhr[fileKey].ontimeout = function(evt) {
                             onFail(new FileTransferError(FileTransferError.CONNECTION_ERR, server, filePath, xhr[fileKey].status, xhr[fileKey].response));
                         };
                         xhr[fileKey].onerror = function () {
@@ -149,11 +149,11 @@ module.exports = {
                         start = end;
                         end = start + bytesPerChunk;
                     }
-                }, function (error) {
+                }, function(error) {
                     onFail(new FileTransferError(FileTransferError.FILE_NOT_FOUND_ERR, server, filePath));
                 });
             });
-        }, function (error) {
+        }, function(error) {
             onFail(new FileTransferError(FileTransferError.FILE_NOT_FOUND_ERR, server, filePath));
         }, [filePath]);
     },
@@ -165,15 +165,15 @@ module.exports = {
             headers = args[4],
             fileWriter,
             onSuccess = function (entry) {
-                if (typeof (win) === 'function') {
+                if (typeof(win) === 'function') {
                     win(entry);
                 }
             },
             onFail = function (error) {
                 var reader;
                 delete xhr[id];
-                if (typeof (fail) === 'function') {
-                    if (error && error.body && typeof (error.body) === 'object') {
+                if (typeof(fail) === 'function') {
+                    if (error && error.body && typeof(error.body) === 'object') {
                         reader = new FileReader()._realReader;
                         reader.onloadend = function () {
                             error.body = this.result;

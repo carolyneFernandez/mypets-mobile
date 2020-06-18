@@ -37,15 +37,15 @@ module.exports = {
         var id = args[0];
         if (xhr[id]) {
             xhr[id].abort();
-            if (typeof (successCallback) === 'function') {
+            if (typeof(successCallback) === 'function') {
                 successCallback();
             }
-        } else if (typeof (errorCallback) === 'function') {
+        } else if (typeof(errorCallback) === 'function') {
             errorCallback();
         }
     },
 
-    upload: function (successCallback, errorCallback, args) {
+    upload: function(successCallback, errorCallback, args) {
         var filePath = args[0],
             server = args[1],
             fileKey = args[2],
@@ -57,15 +57,15 @@ module.exports = {
             headers = args[8];
 
         xhr[fileKey] = new XMLHttpRequest({mozSystem: true});
-        xhr[fileKey].onabort = function () {
+        xhr[fileKey].onabort = function() {
             onFail(new FileTransferError(FileTransferError.ABORT_ERR, server, filePath, this.status, xhr[fileKey].response));
         };
 
-        window.resolveLocalFileSystemURL(filePath, function (entry) {
-            entry.file(function (file) {
+        window.resolveLocalFileSystemURL(filePath, function(entry) {
+            entry.file(function(file) {
                 var reader = new FileReader();
 
-                reader.onloadend = function () {
+                reader.onloadend = function() {
                     var blob = new Blob([this.result], {type: mimeType});
                     var fd = new FormData();
 
@@ -79,7 +79,7 @@ module.exports = {
 
                     xhr[fileKey].open("POST", server);
 
-                    xhr[fileKey].onload = function (evt) {
+                    xhr[fileKey].onload = function(evt) {
                         if (xhr[fileKey].status === 200) {
                             var result = new FileUploadResult();
                             result.bytesSent = blob.size;
@@ -94,11 +94,11 @@ module.exports = {
                         }
                     };
 
-                    xhr[fileKey].ontimeout = function () {
+                    xhr[fileKey].ontimeout = function() {
                         onFail(new FileTransferError(FileTransferError.CONNECTION_ERR, server, filePath, xhr[fileKey].status, xhr[fileKey].response));
                     };
 
-                    xhr[fileKey].onerror = function () {
+                    xhr[fileKey].onerror = function() {
                         onFail(new FileTransferError(FileTransferError.CONNECTION_ERR, server, filePath, this.status, xhr[fileKey].response));
                     };
 
@@ -113,22 +113,22 @@ module.exports = {
 
                 reader.readAsArrayBuffer(file);
 
-            }, function () {
+            }, function() {
                 onFail(new FileTransferError(FileTransferError.FILE_NOT_FOUND_ERR, server, filePath));
             });
-        }, function () {
+        }, function() {
             onFail(new FileTransferError(FileTransferError.FILE_NOT_FOUND_ERR, server, filePath));
         });
 
         function onSuccess(data) {
-            if (typeof (successCallback) === 'function') {
+            if (typeof(successCallback) === 'function') {
                 successCallback(data);
             }
         }
 
         function onFail(code) {
             delete xhr[fileKey];
-            if (typeof (errorCallback) === 'function') {
+            if (typeof(errorCallback) === 'function') {
                 errorCallback(code);
             }
         }
@@ -205,14 +205,14 @@ module.exports = {
         }, 0);
 
         function onSuccess(entry) {
-            if (typeof (successCallback) === 'function') {
+            if (typeof(successCallback) === 'function') {
                 successCallback(entry);
             }
         }
 
         function onFail(error) {
             delete xhr[id];
-            if (typeof (errorCallback) === 'function') {
+            if (typeof(errorCallback) === 'function') {
                 errorCallback(error);
             }
         }

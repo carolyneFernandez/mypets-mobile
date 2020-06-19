@@ -47,6 +47,6 @@ var app = {
 
         console.log('Received Event: ' + id);
 
-        var url = "http://192.168.42.174:8030"
+
     }
 };

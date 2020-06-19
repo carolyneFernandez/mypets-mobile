@@ -48,6 +48,7 @@
   "dependencies": {
     "cordova-android": "^8.1.0",
     "cordova-jquery": "^0.1.6",
-    "cordova-plugin-navigationbar": "^1.0.31"
+    "cordova-plugin-navigationbar": "^1.0.31",
+    "jquery": "^3.5.1"
   }
 }

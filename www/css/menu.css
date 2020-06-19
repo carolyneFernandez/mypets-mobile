@@ -1,0 +1,179 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Avenir', sans-serif;
+    text-transform: uppercase;
+    color: white;
+    background: lightgrey;
+}
+
+nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 90px;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    background-color: #008CBA;
+}
+
+.above-overlay { z-index: 10001; }
+
+nav a.nav-brand {}
+nav a > img {
+    height: 50px;
+    width: auto;
+    margin-left: 30px;
+}
+
+@media (min-width: 789px) {
+    .menu-burger { display: none; }
+}
+
+.menu-burger {
+    width: 30px;
+    height: 22px;
+    cursor: pointer;
+    display: block;
+    right: 50px;
+    margin: 0 30px 0 0;
+    padding: 10px;
+}
+
+.bar,
+.bar:after,
+.bar:before {
+    height: 1px;
+    background: #C4C4C4;
+    width: 30px;
+}
+
+
+.bar {
+    position: relative;
+    transform: translateY(10px);
+    transition: all 0ms 300ms;
+}
+
+.bar.animate {
+    width: 30px;
+    background: rgba(255, 255, 255, 0);
+}
+
+.bar:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    transition: bottom 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.bar:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    transition: top 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.bar.animate:after {
+    width: 30px;
+    top: 0;
+    transform: rotate(45deg);
+    transition: top 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.bar.animate:before {
+    bottom: 0;
+    transform: rotate(-45deg);
+    transition: bottom 300ms cubic-bezier(0.23, 1, 0.32, 1), transform 300ms 300ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+
+/*overlay*/
+
+.overlay {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    top: 0;
+    background: #008CBA;
+}
+
+.overlay a { text-decoration: none; }
+
+.overlay .menu-options-list {
+    display: flex;
+    flex-flow: column nowrap;
+    text-align: center;
+    padding: 0;
+    margin: 10vh 0 0;
+}
+
+.overlay .menu-option {
+    display: block;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.overlay .menu-option:hover {
+    background-color: darkgrey;
+
+    webkit-transition: all .3s ease-in-out;
+    -moz-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+.overlay .menu-option a {
+    color: white;
+
+}
+
+.overlay .menu-option:hover a {
+    color: white;
+}
+
+.overlay .menu-option a span { color: #a3876d;}
+
+@-webkit-keyframes slideDownIn {
+    0%   { opacity: 0;
+        transform: translate(0, -100px);
+    }
+    100% { opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+@-moz-keyframes slideDownIn {
+    0%   { opacity: 0;
+        transform: translate(0, -100px);
+    }
+    100% { opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+@-o-keyframes slideDownIn {
+    0%   { opacity: 0;
+        transform: translate(0, -100px);
+    }
+    100% { opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+@keyframes slideDownIn {
+    0%   { opacity: 0;
+        transform: translate(0, -50px);
+    }
+    100% { opacity: 1;
+        transform: translate(0, 0);
+    }
+}
+
+.slideDownIn {
+    -webkit-animation: slideDownIn 1s; /* Safari 4+ */
+    -moz-animation:    slideDownIn 1s; /* Fx 5+ */
+    -o-animation:      slideDownIn 1s; /* Opera 12+ */
+    animation:         slideDownIn 1s; /* IE 10+, Fx 29+ */
+}

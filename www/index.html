@@ -3,33 +3,46 @@
 <head>
     <meta charset="utf-8"/>
     <meta name="format-detection" content="telephone=no"/>
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
+<!--    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
+-->
     <meta name="msapplication-tap-highlight" content="no"/>
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *"/>
-
-    <link rel="stylesheet" href="css/librarie/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <title>My Pets</title>
+    <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
 
 </head>
-<script src="js/librarie/jquery-3.5.1.js"></script>
-
-<script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
-
-
 <body>
 
-   <div data-include="templates/menu"></div>
+<ul data-role="listview" data-inset="true" data-shadow="false">
+
+    <li data-role="collapsible" data-iconpos="right" data-inset="false">
+        <h2>Birds</h2>
+        <ul data-role="listview" data-theme="b">
+            <li><a href="#">Condor</a></li>
+            <li><a href="#">Eagle</a></li>
+            <li><a href="#">Sparrow</a></li>
+        </ul>
+    </li>
+
+</ul>
+
+   <!--<div data-include="templates/menu"></div> -->
 
 </body>
 
 </html>
 
+<script src="js/librarie/jquery-1.11.1.min.js"></script>
+<script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript">
   //  app.initialize()
+/*
   $('div[data-include]').each(function() {
       $(this).load( $(this).attr('data-include') + '.html').trigger('create');
   });
-
+*/
 </script>

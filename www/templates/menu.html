@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="css/menu.css">
+
+<header>
+    <nav>
+        <div class="navbar-menu">
+            <a href="#" class="hamburger above-overlay" style="margin-right: auto;">
+                <div class="menu-burger ">
+                    <div class="bar"></div>
+                </div>
+            </a>
+            <a class="nav-brand above-overlay" href="#"><img src="img/mypets_logo2.png" height="200" width="200"/></a>
+        </div>
+        <ul class="clearfix menu">
+            <li><a href="#">CLINIQUES À PROXIMITÉ<span>.</span></a></li>
+            <li ><a href="#">MON COMPTE<span>.</span></a></li>
+        </ul>
+    </nav>
+</header>
+
+<script type="text/javascript">
+    $('header').on('click', function(e) {
+        e.preventDefault();
+          $('.menu').toggleClass('slide-down');
+          $('.bar').toggleClass('animate'); // Creates the Hamburger -> X Animation on first click
+    });
+
+</script>

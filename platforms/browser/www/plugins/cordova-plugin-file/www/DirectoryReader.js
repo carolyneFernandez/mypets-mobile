@@ -25,7 +25,7 @@ var FileError = require('./FileError');
 /**
  * An interface that lists the files and directories in a directory.
  */
-function DirectoryReader (localURL) {
+function DirectoryReader(localURL) {
     this.localURL = localURL || null;
     this.hasReadEntries = false;
 }

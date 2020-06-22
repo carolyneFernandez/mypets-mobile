@@ -239,12 +239,12 @@ FileWriter.prototype.seek = function (offset) {
     // See back from end of file.
     if (offset < 0) {
         this.position = Math.max(offset + this.length, 0);
-    // Offset is bigger than file size so set position
-    // to the end of the file.
+        // Offset is bigger than file size so set position
+        // to the end of the file.
     } else if (offset > this.length) {
         this.position = this.length;
-    // Offset is between 0 and file size so set the position
-    // to start writing.
+        // Offset is between 0 and file size so set the position
+        // to start writing.
     } else {
         this.position = offset;
     }

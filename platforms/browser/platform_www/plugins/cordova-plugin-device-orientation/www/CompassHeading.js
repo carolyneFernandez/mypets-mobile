@@ -19,11 +19,11 @@ cordova.define("cordova-plugin-device-orientation.CompassHeading", function(requ
  *
 */
 
-var CompassHeading = function(magneticHeading, trueHeading, headingAccuracy, timestamp) {
-  this.magneticHeading = magneticHeading;
-  this.trueHeading = trueHeading;
-  this.headingAccuracy = headingAccuracy;
-  this.timestamp = timestamp || new Date().getTime();
+var CompassHeading = function (magneticHeading, trueHeading, headingAccuracy, timestamp) {
+    this.magneticHeading = magneticHeading;
+    this.trueHeading = trueHeading;
+    this.headingAccuracy = headingAccuracy;
+    this.timestamp = timestamp || new Date().getTime();
 };
 
 module.exports = CompassHeading;

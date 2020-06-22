@@ -52,12 +52,13 @@ exports.file = {
 
 channel.waitForInitialization('onFileSystemPathsReady');
 channel.onCordovaReady.subscribe(function () {
-    function after (paths) {
+    function after(paths) {
         for (var k in paths) {
             exports.file[k] = paths[k];
         }
         channel.initializationComplete('onFileSystemPathsReady');
     }
+
     exec(after, null, 'File', 'requestAllPaths', []);
 });
 

@@ -29,14 +29,14 @@ var cordova = require('cordova'),
 var STATUS_CRITICAL = 5;
 var STATUS_LOW = 20;
 
-var Battery = function() {
+var Battery = function () {
     this._level = null;
     this._isPlugged = null;
     // Create new event handlers on the window (returns a channel instance)
     this.channels = {
-      batterystatus:cordova.addWindowEventHandler("batterystatus"),
-      batterylow:cordova.addWindowEventHandler("batterylow"),
-      batterycritical:cordova.addWindowEventHandler("batterycritical")
+        batterystatus: cordova.addWindowEventHandler("batterystatus"),
+        batterylow: cordova.addWindowEventHandler("batterylow"),
+        batterycritical: cordova.addWindowEventHandler("batterycritical")
     };
     for (var key in this.channels) {
         this.channels[key].onHasSubscribersChange = Battery.onHasSubscribersChange;
@@ -54,13 +54,13 @@ function handlers() {
  * Keep track of how many handlers we have so we can start and stop the native battery listener
  * appropriately (and hopefully save on battery life!).
  */
-Battery.onHasSubscribersChange = function() {
-  // If we just registered the first handler, make sure native listener is started.
-  if (this.numHandlers === 1 && handlers() === 1) {
-      exec(battery._status, battery._error, "Battery", "start", []);
-  } else if (handlers() === 0) {
-      exec(null, null, "Battery", "stop", []);
-  }
+Battery.onHasSubscribersChange = function () {
+    // If we just registered the first handler, make sure native listener is started.
+    if (this.numHandlers === 1 && handlers() === 1) {
+        exec(battery._status, battery._error, "Battery", "start", []);
+    } else if (handlers() === 0) {
+        exec(null, null, "Battery", "stop", []);
+    }
 };
 
 /**
@@ -72,22 +72,21 @@ Battery.prototype._status = function (info) {
 
     if (info) {
         if (battery._level !== info.level || battery._isPlugged !== info.isPlugged) {
-            
-            if(info.level === null && battery._level !== null) {
+
+            if (info.level === null && battery._level !== null) {
                 return; // special case where callback is called because we stopped listening to the native side.
             }
-            
+
             // Something changed. Fire batterystatus event
             cordova.fireWindowEvent("batterystatus", info);
 
             if (!info.isPlugged) { // do not fire low/critical if we are charging. issue: CB-4520
                 // note the following are NOT exact checks, as we want to catch a transition from 
                 // above the threshold to below. issue: CB-4519
-                if (battery._level > STATUS_CRITICAL && info.level <= STATUS_CRITICAL) { 
+                if (battery._level > STATUS_CRITICAL && info.level <= STATUS_CRITICAL) {
                     // Fire critical battery event
                     cordova.fireWindowEvent("batterycritical", info);
-                }
-                else if (battery._level > STATUS_LOW && info.level <= STATUS_LOW) {
+                } else if (battery._level > STATUS_LOW && info.level <= STATUS_LOW) {
                     // Fire low battery event
                     cordova.fireWindowEvent("batterylow", info);
                 }
@@ -101,7 +100,7 @@ Battery.prototype._status = function (info) {
 /**
  * Error callback for battery start
  */
-Battery.prototype._error = function(e) {
+Battery.prototype._error = function (e) {
     console.log("Error initializing Battery: " + e);
 };
 

@@ -34,7 +34,7 @@ channel.waitForInitialization('onCordovaInfoReady');
  * phone, etc.
  * @constructor
  */
-function Device () {
+function Device() {
     this.available = false;
     this.platform = null;
     this.version = null;

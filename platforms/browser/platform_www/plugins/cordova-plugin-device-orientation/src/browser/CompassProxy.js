@@ -20,8 +20,8 @@ cordova.define("cordova-plugin-device-orientation.CompassProxy", function(requir
 */
 
 var Compass = {
-    getHeading: function(success, error) {
-        var listener = function() {
+    getHeading: function (success, error) {
+        var listener = function () {
             var orient = {};
             var heading = (Math.round((Math.random() * 360) * 100) / 100);
 

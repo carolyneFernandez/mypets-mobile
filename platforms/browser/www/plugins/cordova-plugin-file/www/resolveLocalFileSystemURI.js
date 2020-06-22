@@ -20,13 +20,14 @@ cordova.define("cordova-plugin-file.resolveLocalFileSystemURI", function(require
 */
 (function () {
     // For browser platform: not all browsers use overrided `resolveLocalFileSystemURL`.
-    function checkBrowser () {
+    function checkBrowser() {
         if (cordova.platformId === 'browser' && require('./isChrome')()) { // eslint-disable-line no-undef
             module.exports.resolveLocalFileSystemURL = window.resolveLocalFileSystemURL || window.webkitResolveLocalFileSystemURL;
             return true;
         }
         return false;
     }
+
     if (checkBrowser()) {
         return;
     }

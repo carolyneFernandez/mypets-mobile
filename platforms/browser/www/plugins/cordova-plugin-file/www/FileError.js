@@ -22,7 +22,7 @@ cordova.define("cordova-plugin-file.FileError", function(require, exports, modul
 /**
  * FileError
  */
-function FileError (error) {
+function FileError(error) {
     this.code = error || null;
 }
 

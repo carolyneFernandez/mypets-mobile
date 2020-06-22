@@ -24,7 +24,7 @@ cordova.define("cordova-plugin-device-orientation.CompassError", function(requir
  *  An error code assigned by an implementation when an error has occurred
  * @constructor
  */
-var CompassError = function(err) {
+var CompassError = function (err) {
     this.code = (err !== undefined ? err : null);
 };
 

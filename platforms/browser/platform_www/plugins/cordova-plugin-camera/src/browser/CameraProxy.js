@@ -31,9 +31,9 @@ function takePicture(success, error, opts) {
         input.type = 'file';
         input.name = 'files[]';
 
-        input.onchange = function(inputEvent) {
+        input.onchange = function (inputEvent) {
             var reader = new FileReader();
-            reader.onload = function(readerEvent) {
+            reader.onload = function (readerEvent) {
                 input.parentNode.removeChild(input);
 
                 var imageData = readerEvent.target.result;
@@ -63,7 +63,7 @@ function capture(success, errorCallback) {
     video.height = 240;
     button.innerHTML = 'Capture!';
 
-    button.onclick = function() {
+    button.onclick = function () {
         // create a canvas and capture a frame from video stream
         var canvas = document.createElement('canvas');
         canvas.getContext('2d').drawImage(video, 0, 0, 320, 240);
@@ -87,11 +87,11 @@ function capture(success, errorCallback) {
     };
 
     navigator.getUserMedia = navigator.getUserMedia ||
-                             navigator.webkitGetUserMedia ||
-                             navigator.mozGetUserMedia ||
-                             navigator.msGetUserMedia;
+        navigator.webkitGetUserMedia ||
+        navigator.mozGetUserMedia ||
+        navigator.msGetUserMedia;
 
-    var successCallback = function(stream) {
+    var successCallback = function (stream) {
         localMediaStream = stream;
         video.src = window.URL.createObjectURL(localMediaStream);
         video.play();
@@ -108,9 +108,10 @@ function capture(success, errorCallback) {
 
 module.exports = {
     takePicture: takePicture,
-    cleanup: function(){}
+    cleanup: function () {
+    }
 };
 
-require("cordova/exec/proxy").add("Camera",module.exports);
+require("cordova/exec/proxy").add("Camera", module.exports);
 
 });

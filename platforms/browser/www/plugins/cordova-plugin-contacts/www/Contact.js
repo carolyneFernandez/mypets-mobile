@@ -25,36 +25,36 @@ var argscheck = require('cordova/argscheck'),
     utils = require('cordova/utils');
 
 /**
-* Converts primitives into Complex Object
-* Currently only used for Date fields
-*/
+ * Converts primitives into Complex Object
+ * Currently only used for Date fields
+ */
 function convertIn(contact) {
     var value = contact.birthday;
     try {
-      contact.birthday = new Date(parseFloat(value));
-    } catch (exception){
-      console.log("Cordova Contact convertIn error: exception creating date.");
+        contact.birthday = new Date(parseFloat(value));
+    } catch (exception) {
+        console.log("Cordova Contact convertIn error: exception creating date.");
     }
     return contact;
 }
 
 /**
-* Converts Complex objects into primitives
-* Only conversion at present is for Dates.
-**/
+ * Converts Complex objects into primitives
+ * Only conversion at present is for Dates.
+ **/
 
 function convertOut(contact) {
     var value = contact.birthday;
     if (value !== null) {
         // try to make it a Date object if it is not already
-        if (!utils.isDate(value)){
+        if (!utils.isDate(value)) {
             try {
                 value = new Date(value);
-            } catch(exception){
+            } catch (exception) {
                 value = null;
             }
         }
-        if (utils.isDate(value)){
+        if (utils.isDate(value)) {
             value = value.valueOf(); // convert to milliseconds
         }
         contact.birthday = value;
@@ -63,25 +63,25 @@ function convertOut(contact) {
 }
 
 /**
-* Contains information about a single contact.
-* @constructor
-* @param {DOMString} id unique identifier
-* @param {DOMString} displayName
-* @param {ContactName} name
-* @param {DOMString} nickname
-* @param {Array.<ContactField>} phoneNumbers array of phone numbers
-* @param {Array.<ContactField>} emails array of email addresses
-* @param {Array.<ContactAddress>} addresses array of addresses
-* @param {Array.<ContactField>} ims instant messaging user ids
-* @param {Array.<ContactOrganization>} organizations
-* @param {DOMString} birthday contact's birthday
-* @param {DOMString} note user notes about contact
-* @param {Array.<ContactField>} photos
-* @param {Array.<ContactField>} categories
-* @param {Array.<ContactField>} urls contact's web sites
-*/
+ * Contains information about a single contact.
+ * @constructor
+ * @param {DOMString} id unique identifier
+ * @param {DOMString} displayName
+ * @param {ContactName} name
+ * @param {DOMString} nickname
+ * @param {Array.<ContactField>} phoneNumbers array of phone numbers
+ * @param {Array.<ContactField>} emails array of email addresses
+ * @param {Array.<ContactAddress>} addresses array of addresses
+ * @param {Array.<ContactField>} ims instant messaging user ids
+ * @param {Array.<ContactOrganization>} organizations
+ * @param {DOMString} birthday contact's birthday
+ * @param {DOMString} note user notes about contact
+ * @param {Array.<ContactField>} photos
+ * @param {Array.<ContactField>} categories
+ * @param {Array.<ContactField>} urls contact's web sites
+ */
 var Contact = function (id, displayName, name, nickname, phoneNumbers, emails, addresses,
-    ims, organizations, birthday, note, photos, categories, urls) {
+                        ims, organizations, birthday, note, photos, categories, urls) {
     this.id = id || null;
     this.rawId = null;
     this.displayName = displayName || null;
@@ -100,29 +100,28 @@ var Contact = function (id, displayName, name, nickname, phoneNumbers, emails, a
 };
 
 /**
-* Removes contact from device storage.
-* @param successCB success callback
-* @param errorCB error callback
-*/
-Contact.prototype.remove = function(successCB, errorCB) {
+ * Removes contact from device storage.
+ * @param successCB success callback
+ * @param errorCB error callback
+ */
+Contact.prototype.remove = function (successCB, errorCB) {
     argscheck.checkArgs('FF', 'Contact.remove', arguments);
-    var fail = errorCB && function(code) {
+    var fail = errorCB && function (code) {
         errorCB(new ContactError(code));
     };
     if (this.id === null) {
         fail(ContactError.UNKNOWN_ERROR);
-    }
-    else {
+    } else {
         exec(successCB, fail, "Contacts", "remove", [this.id]);
     }
 };
 
 /**
-* Creates a deep copy of this Contact.
-* With the contact ID set to null.
-* @return copy of this Contact
-*/
-Contact.prototype.clone = function() {
+ * Creates a deep copy of this Contact.
+ * With the contact ID set to null.
+ * @return copy of this Contact
+ */
+Contact.prototype.clone = function () {
     var clonedContact = utils.clone(this);
     clonedContact.id = null;
     clonedContact.rawId = null;
@@ -148,23 +147,22 @@ Contact.prototype.clone = function() {
 };
 
 /**
-* Persists contact to device storage.
-* @param successCB success callback
-* @param errorCB error callback
-*/
-Contact.prototype.save = function(successCB, errorCB) {
+ * Persists contact to device storage.
+ * @param successCB success callback
+ * @param errorCB error callback
+ */
+Contact.prototype.save = function (successCB, errorCB) {
     argscheck.checkArgs('FFO', 'Contact.save', arguments);
-    var fail = errorCB && function(code) {
+    var fail = errorCB && function (code) {
         errorCB(new ContactError(code));
     };
-    var success = function(result) {
+    var success = function (result) {
         if (result) {
             if (successCB) {
                 var fullContact = require('./contacts').create(result);
                 successCB(convertIn(fullContact));
             }
-        }
-        else {
+        } else {
             // no Entry object returned
             fail(ContactError.UNKNOWN_ERROR);
         }

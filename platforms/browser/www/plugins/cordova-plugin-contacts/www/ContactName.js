@@ -20,16 +20,16 @@ cordova.define("cordova-plugin-contacts.ContactName", function(require, exports,
 */
 
 /**
-* Contact name.
-* @constructor
-* @param formatted // NOTE: not part of W3C standard
-* @param familyName
-* @param givenName
-* @param middle
-* @param prefix
-* @param suffix
-*/
-var ContactName = function(formatted, familyName, givenName, middle, prefix, suffix) {
+ * Contact name.
+ * @constructor
+ * @param formatted // NOTE: not part of W3C standard
+ * @param familyName
+ * @param givenName
+ * @param middle
+ * @param prefix
+ * @param suffix
+ */
+var ContactName = function (formatted, familyName, givenName, middle, prefix, suffix) {
     this.formatted = formatted || null;
     this.familyName = familyName || null;
     this.givenName = givenName || null;

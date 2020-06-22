@@ -43,7 +43,8 @@ cordova.define("cordova-plugin-file.Preparing", function(require, exports, modul
             }
         };
     } else {
-        window.requestFileSystem(window.TEMPORARY, 1, createFileEntryFunctions, function () {});
+        window.requestFileSystem(window.TEMPORARY, 1, createFileEntryFunctions, function () {
+        });
     }
 
     if (!window.resolveLocalFileSystemURL) {
@@ -106,7 +107,7 @@ cordova.define("cordova-plugin-file.Preparing", function(require, exports, modul
         }
     };
 
-    function createFileEntryFunctions (fs) {
+    function createFileEntryFunctions(fs) {
         fs.root.getFile('todelete_658674_833_4_cdv', {create: true}, function (fileEntry) {
             var fileEntryType = Object.getPrototypeOf(fileEntry);
             var entryType = Object.getPrototypeOf(fileEntryType);
@@ -154,7 +155,10 @@ cordova.define("cordova-plugin-file.Preparing", function(require, exports, modul
                     }
                 };
 
-                fileEntry.remove(function () { entryFunctionsCreated = true; }, function () { /* empty callback */ });
+                fileEntry.remove(function () {
+                    entryFunctionsCreated = true;
+                }, function () { /* empty callback */
+                });
             });
         });
     }
@@ -168,7 +172,9 @@ cordova.define("cordova-plugin-file.Preparing", function(require, exports, modul
         fail('This browser does not support this function');
     };
 
-    window.isFilePluginReadyRaised = function () { return eventWasThrown; };
+    window.isFilePluginReadyRaised = function () {
+        return eventWasThrown;
+    };
 
     window.initPersistentFileSystem(PERSISTENT_FS_QUOTA, function () {
         console.log('Persistent fs quota granted');
@@ -178,7 +184,7 @@ cordova.define("cordova-plugin-file.Preparing", function(require, exports, modul
     });
 
     channel.onCordovaReady.subscribe(function () {
-        function dispatchEventIfReady () {
+        function dispatchEventIfReady() {
             if (entryFunctionsCreated && quotaWasRequested) {
                 window.dispatchEvent(filePluginIsReadyEvent);
                 eventWasThrown = true;

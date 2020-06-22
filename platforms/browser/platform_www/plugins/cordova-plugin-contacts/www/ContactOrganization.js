@@ -20,16 +20,16 @@ cordova.define("cordova-plugin-contacts.ContactOrganization", function(require, 
 */
 
 /**
-* Contact organization.
-* @constructor
-* @param pref
-* @param type
-* @param name
-* @param dept
-* @param title
-*/
+ * Contact organization.
+ * @constructor
+ * @param pref
+ * @param type
+ * @param name
+ * @param dept
+ * @param title
+ */
 
-var ContactOrganization = function(pref, type, name, dept, title) {
+var ContactOrganization = function (pref, type, name, dept, title) {
     this.id = null;
     this.pref = (typeof pref != 'undefined' ? pref : false);
     this.type = type || null;

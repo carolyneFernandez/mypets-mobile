@@ -35,7 +35,7 @@ function listener(success) {
 
 var Accelerometer = {
     start: function start(success, error) {
-        return window.addEventListener('devicemotion', function(){
+        return window.addEventListener('devicemotion', function () {
             listener(success);
         }, false);
     }

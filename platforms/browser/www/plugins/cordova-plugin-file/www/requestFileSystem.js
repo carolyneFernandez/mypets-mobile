@@ -21,13 +21,14 @@ cordova.define("cordova-plugin-file.requestFileSystem", function(require, export
 
 (function () {
     // For browser platform: not all browsers use this file.
-    function checkBrowser () {
+    function checkBrowser() {
         if (cordova.platformId === 'browser' && require('./isChrome')()) { // eslint-disable-line no-undef
             module.exports = window.requestFileSystem || window.webkitRequestFileSystem;
             return true;
         }
         return false;
     }
+
     if (checkBrowser()) {
         return;
     }

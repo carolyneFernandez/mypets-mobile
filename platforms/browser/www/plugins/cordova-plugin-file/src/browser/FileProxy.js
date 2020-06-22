@@ -81,7 +81,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
 
         var unicodeLastChar = 65535;
 
-    /** * Exported functionality ***/
+        /** * Exported functionality ***/
 
         exports.requestFileSystem = function (successCallback, errorCallback, args) {
             var type = args[0];
@@ -328,13 +328,15 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
                 return;
             }
 
-            function deleteEntry (isDirectory) {
+            function deleteEntry(isDirectory) {
                 // TODO: This doesn't protect against directories that have content in it.
                 // Should throw an error instead if the dirEntry is not empty.
                 idb_['delete'](fullPath, function () {
                     successCallback();
                 }, function () {
-                    if (errorCallback) { errorCallback(); }
+                    if (errorCallback) {
+                        errorCallback();
+                    }
                 }, isDirectory);
             }
 
@@ -481,17 +483,21 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
                 // Check directory
                 exports.getDirectory(function () {
 
-                    // Create dest file
-                    exports.getFile(function (dstFileEntry) {
+                        // Create dest file
+                        exports.getFile(function (dstFileEntry) {
 
-                        exports.write(function () {
-                            successCallback(dstFileEntry);
-                        }, errorCallback, [dstFileEntry.file_.storagePath, srcFileEntry.file_.blob_, 0]);
+                            exports.write(function () {
+                                successCallback(dstFileEntry);
+                            }, errorCallback, [dstFileEntry.file_.storagePath, srcFileEntry.file_.blob_, 0]);
 
-                    }, errorCallback, [parentFullPath, name, {create: true}]);
+                        }, errorCallback, [parentFullPath, name, {create: true}]);
 
-                }, function () { if (errorCallback) { errorCallback(FileError.NOT_FOUND_ERR); } },
-                [path.storagePath, null, {create: false}]);
+                    }, function () {
+                        if (errorCallback) {
+                            errorCallback(FileError.NOT_FOUND_ERR);
+                        }
+                    },
+                    [path.storagePath, null, {create: false}]);
 
             }, errorCallback, [srcPath, null]);
         };
@@ -558,7 +564,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
             }
 
             // to avoid path form of '///path/to/file'
-            function handlePathSlashes (path) {
+            function handlePathSlashes(path) {
                 var cutIndex = 0;
                 for (var i = 0; i < path.length - 1; i++) {
                     if (path[i] === DIR_SEPARATOR && path[i + 1] === DIR_SEPARATOR) {
@@ -581,7 +587,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
                 exports.requestFileSystem(function () {
                     exports.getFile(successCallback, function () {
                         exports.getDirectory(successCallback, errorCallback, [pathsPrefix.dataDirectory, path,
-                        {create: false}]);
+                            {create: false}]);
                     }, [pathsPrefix.dataDirectory, path, {create: false}]);
                 }, errorCallback, [LocalFileSystem.PERSISTENT]);
             } else if (path.indexOf(pathsPrefix.cacheDirectory) === 0) {
@@ -591,7 +597,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
                 exports.requestFileSystem(function () {
                     exports.getFile(successCallback, function () {
                         exports.getDirectory(successCallback, errorCallback, [pathsPrefix.cacheDirectory, path,
-                        {create: false}]);
+                            {create: false}]);
                     }, [pathsPrefix.cacheDirectory, path, {create: false}]);
                 }, errorCallback, [LocalFileSystem.TEMPORARY]);
             } else if (path.indexOf(pathsPrefix.applicationDirectory) === 0) {
@@ -624,7 +630,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
                 }
             }
 
-            function writeFile (entry) {
+            function writeFile(entry) {
                 entry.createWriter(function (fileWriter) {
                     fileWriter.onwriteend = function (evt) {
                         if (!evt.target.error) {
@@ -646,7 +652,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
             successCallback(pathsPrefix);
         };
 
-    /** * Helpers ***/
+        /** * Helpers ***/
 
         /**
          * Interface to wrap the native File interface.
@@ -659,7 +665,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
          * @param {Object} opts Initial values.
          * @constructor
          */
-        function MyFile (opts) {
+        function MyFile(opts) {
             var blob_ = new Blob(); // eslint-disable-line no-undef
 
             this.size = opts.size || 0;
@@ -712,10 +718,12 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
             setBase64: function (myFile, base64) {
                 if (base64) {
                     var arrayBuffer = (new Uint8Array(
-                        [].map.call(atob(base64), function (c) { return c.charCodeAt(0); })
+                        [].map.call(atob(base64), function (c) {
+                            return c.charCodeAt(0);
+                        })
                     )).buffer;
 
-                    myFile.blob_ = new Blob([arrayBuffer], { type: myFile.type });
+                    myFile.blob_ = new Blob([arrayBuffer], {type: myFile.type});
                 } else {
                     myFile.blob_ = new Blob();
                 }
@@ -725,7 +733,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
         // When saving an entry, the fullPath should always lead with a slash and never
         // end with one (e.g. a directory). Also, resolve '.' and '..' to an absolute
         // one. This method ensures path is legit!
-        function resolveToFullPath_ (cwdFullPath, path) {
+        function resolveToFullPath_(cwdFullPath, path) {
             path = path || '';
             var fullPath = path;
             var prefix = '';
@@ -795,7 +803,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
             };
         }
 
-        function fileEntryFromIdbEntry (fileEntry) {
+        function fileEntryFromIdbEntry(fileEntry) {
             // IDB won't save methods, so we need re-create the FileEntry.
             var clonedFileEntry = new FileEntry(fileEntry.name, fileEntry.fullPath, fileEntry.filesystem);
             clonedFileEntry.file_ = fileEntry.file_;
@@ -803,7 +811,7 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
             return clonedFileEntry;
         }
 
-        function readAs (what, fullPath, encoding, startPos, endPos, successCallback, errorCallback) {
+        function readAs(what, fullPath, encoding, startPos, endPos, successCallback, errorCallback) {
             exports.getFile(function (fileEntry) {
                 var fileReader = new FileReader(); // eslint-disable-line no-undef
                 var blob = fileEntry.file_.blob_.slice(startPos, endPos);
@@ -815,24 +823,24 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
                 fileReader.onerror = errorCallback;
 
                 switch (what) {
-                case 'text':
-                    fileReader.readAsText(blob, encoding);
-                    break;
-                case 'dataURL':
-                    fileReader.readAsDataURL(blob);
-                    break;
-                case 'arrayBuffer':
-                    fileReader.readAsArrayBuffer(blob);
-                    break;
-                case 'binaryString':
-                    fileReader.readAsBinaryString(blob);
-                    break;
+                    case 'text':
+                        fileReader.readAsText(blob, encoding);
+                        break;
+                    case 'dataURL':
+                        fileReader.readAsDataURL(blob);
+                        break;
+                    case 'arrayBuffer':
+                        fileReader.readAsArrayBuffer(blob);
+                        break;
+                    case 'binaryString':
+                        fileReader.readAsBinaryString(blob);
+                        break;
                 }
 
             }, errorCallback, [fullPath, null]);
         }
 
-    /** * Core logic to handle IDB operations ***/
+        /** * Core logic to handle IDB operations ***/
 
         idb_.open = function (dbName, successCallback, errorCallback) {
             var self = this;
@@ -1040,14 +1048,14 @@ cordova.define("cordova-plugin-file.browserFileProxy", function(require, exports
         };
 
         // Global error handler. Errors bubble from request, to transaction, to db.
-        function onError (e) {
+        function onError(e) {
             switch (e.target.errorCode) {
-            case 12:
-                console.log('Error - Attempt to open db with a lower version than the ' +
+                case 12:
+                    console.log('Error - Attempt to open db with a lower version than the ' +
                         'current one.');
-                break;
-            default:
-                console.log('errorCode: ' + e.target.errorCode);
+                    break;
+                default:
+                    console.log('errorCode: ' + e.target.errorCode);
             }
 
             console.log(e, e.code, e.message);

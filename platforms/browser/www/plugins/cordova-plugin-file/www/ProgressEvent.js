@@ -51,7 +51,7 @@ var ProgressEvent = (function () {
         };
     } catch(e){
     */
-    return function ProgressEvent (type, dict) {
+    return function ProgressEvent(type, dict) {
         this.type = type;
         this.bubbles = false;
         this.cancelBubble = false;

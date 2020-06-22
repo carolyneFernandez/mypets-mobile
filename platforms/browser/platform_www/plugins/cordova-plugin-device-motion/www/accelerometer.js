@@ -69,7 +69,7 @@ function stop() {
 
 // Adds a callback pair to the listeners array
 function createCallbackPair(win, fail) {
-    return { win: win, fail: fail };
+    return {win: win, fail: fail};
 }
 
 // Removes a win/fail listener pair from the listeners array
@@ -141,7 +141,8 @@ var accelerometer = {
         // Keep reference to watch id, and report accel readings as often as defined in frequency
         var id = utils.createUUID();
 
-        var p = createCallbackPair(function () { }, function (e) {
+        var p = createCallbackPair(function () {
+        }, function (e) {
             removeListeners(p);
             if (errorCallback) {
                 errorCallback(e);
@@ -171,7 +172,7 @@ var accelerometer = {
         if (cordova.platformId === "browser" && !eventTimerId) {
             // Start firing devicemotion events if we haven't already
             var devicemotionEvent = new Event('devicemotion');
-            eventTimerId = window.setInterval(function() {
+            eventTimerId = window.setInterval(function () {
                 window.dispatchEvent(devicemotionEvent);
             }, 200);
         }

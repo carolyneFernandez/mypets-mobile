@@ -24,7 +24,7 @@ cordova.define("cordova-plugin-contacts.ContactError", function(require, exports
  *  An error code assigned by an implementation when an error has occurred
  * @constructor
  */
-var ContactError = function(err) {
+var ContactError = function (err) {
     this.code = (typeof err != 'undefined' ? err : null);
 };
 

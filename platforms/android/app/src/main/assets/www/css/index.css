@@ -156,15 +156,44 @@ body {
     flex: 1;
 }
 .button {
-    background-color: #F2AF58; /* yellow */
+    background-color: #F2AF58;
     border: none;
     color: white;
-    padding: 15px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    padding: 6%;
     margin: 4px 2px;
-    cursor: pointer;
+    width: 100%;
+    vertical-align: bottom;
+}
+.container-animaux div{
+    width:48%; display:inline-block;
+}
+.container-animaux{
+    margin: 5% 0;
+
+}
+.container-animaux div img{
+    vertical-align: middle;
+    border-radius: 0% 45% 45% 0%;
+}
+
+ img{
     width: 100%;
 }
+.container-animaux .detail img {
+    border: 3px inset black;
+    border-radius: 0;
+}
+/*RENDEZ-VOUS*/
+#soumettre{
+    background-color: #008CBA;
+    color: white;
+    margin: 16% 0%;
+}
+
+#annulation{
+    background-color: #F2AF58;
+    color: white;
+    margin: 16% 0%;
+
+}
+

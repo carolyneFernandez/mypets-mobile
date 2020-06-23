@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rendez-vous</title>
+    <meta name="format-detection" content="telephone=yes"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+
+</head>
+<body>
+<header>
+
+    <div data-menu="templates/menu"></div>
+</header>
+<div class="container">
+    <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l">
+        Prendre rendez-vous
+    </button>
+
+
+    <div data-role="main" class="ui-content">
+    <form method="post" action="demo_form.php">
+        <div class="ui-field-contain ">
+            <label for="animal">Animal </label>
+            <input type="text" name="animal" id="animal">
+        </div>
+        <div class="ui-field-contain">
+            <label for="date">Date </label>
+             <input type="date" name="date" id="date">
+        </div>
+        <div class="ui-field-contain">
+            <label>Motif:</label>
+            <select data-iconpos="left">
+                <option value="1">The 1st Option</option>
+                <option value="2">The 2nd Option</option>
+            </select>
+        </div>
+        <div class="ui-field-contain">
+            <label>Vétérinaire:</label>
+            <select data-iconpos="left">
+                <option value="1">The 1st Option</option>
+                <option value="2">The 2nd Option</option>
+            </select>
+        </div>
+        <div class="ui-field-contain">
+            <label>Clinique:</label>
+            <select data-iconpos="left">
+                <option value="1">The 1st Option</option>
+                <option value="2">The 2nd Option</option>
+            </select>
+        </div>
+        <div class="ui-field-contain">
+            <label for="textarea-1">Note supplémentaire:</label>
+            <textarea name="textarea-1" id="textarea-1"></textarea>
+        </div>
+
+        <button class="button" id="soumettre">Soumettre ma demande</button>
+        <button class="button" id="annulation">Annulation</button>
+
+    </form>
+    </div>
+
+</div>
+
+
+
+</body>
+</html>
+
+<style>
+    form > div{
+    display: flex !important;
+        justify-content: space-around;
+}
+     form .ui-field-contain>label~[class*=ui-], .ui-field-contain .ui-controlgroup-controls{
+        width: 60%;
+    }
+
+</style>
+<script src="js/librarie/jquery-1.11.1.min.js"></script>
+<script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
+
+<script type="text/javascript">
+    $('div[data-menu]').each(function() {
+        $(this).load( $(this).attr('data-menu') + '.html').trigger('create');
+    });
+
+
+</script>

@@ -12,9 +12,10 @@
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
+
 </head>
 <body>
-<header>
+<header style="background:grey">
     <div data-menu="templates/menu"></div>
 </header>
 
@@ -22,9 +23,9 @@
 <div class="container ">
 
 
-    <h1>Mes animaux</h1>
+    <h1>Detail de Felix</h1>
     <div class="container-animaux">
-        <div>
+        <div class="detail">
 
             <img src="img/animals/labrador.jpg"/>
         </div>
@@ -37,39 +38,34 @@
         </div>
     </div>
 
-    <div class="container-animaux">
-        <div>
-
-            <img src="img/animals/yorshire.jpg"/>
-        </div>
-
-        <div>
-            <h1>Toto </h1>
-            <p>Yorshire Terrier</p>
-            <p>54cm</p>
-            <p> 1 ans</p>
-        </div>
-    </div>
-
     <button class="button prendRendezvous">Prendre un rendez-vous</button>
     <button class="button">Cliniques à proximité</button>
 
 </div>
 <footer >
-    <h1 style="margin-bottom: 10%;">Mes rendez-vous</h1>
+    <h1 style="margin-bottom: 10%;">Rendez-vous de Felix</h1>
 
     <div class="container-animaux">
-
         <div>
-            <h1>Felix</h1>
+            <p> Le 16/11/2020 à 18h30.</p>
+            <p>  Paris 14ème</p>
+            <p>  9 avenue Gambetta </p>
+         </div>
+        <div>
+            <button class="button">Annulation</button>
         </div>
-
+    </div>
+    <div class="container-animaux">
         <div>
             <p> Le 16/11/2020 à 18h30.</p>
             <p>  Paris 14ème</p>
             <p>  9 avenue Gambetta </p>
         </div>
+        <div>
+            <button class="button" id="annulation">Annulation</button>
+        </div>
     </div>
+
 
 
 
@@ -77,16 +73,11 @@
 </body>
 
 </html>
-
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
 
 <script type="text/javascript">
     $('div[data-menu]').each(function() {
         $(this).load( $(this).attr('data-menu') + '.html').trigger('create');
-    });
-    $('.container-animaux').on('click', function(e) {
-        e.preventDefault();
-        window.location = "./detail-animal.html";
     });
     $('.prendRendezvous').on('click', function(e) {
         e.preventDefault();

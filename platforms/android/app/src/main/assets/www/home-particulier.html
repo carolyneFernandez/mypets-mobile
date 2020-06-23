@@ -12,10 +12,9 @@
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
-
 </head>
 <body>
-<header style="background:grey">
+<header>
     <div data-menu="templates/menu"></div>
 </header>
 
@@ -52,13 +51,14 @@
         </div>
     </div>
 
-    <button class="button">Prendre un rendez-vous</button>
+    <button class="button prendRendezvous">Prendre un rendez-vous</button>
     <button class="button">Cliniques à proximité</button>
 
 </div>
 <footer >
+    <h1 style="margin-bottom: 10%;">Mes rendez-vous</h1>
+
     <div class="container-animaux">
-        <h1 style="margin-bottom: 10%;">Mes rendez-vous</h1>
 
         <div>
             <h1>Felix</h1>
@@ -71,30 +71,26 @@
         </div>
     </div>
 
+
+
 </footer>
 </body>
 
 </html>
-<style>
 
-.container-animaux div{
-    width:48%; display:inline-block;
-}
-.container-animaux{
-    margin: 5% 0;
-
-}
-.container-animaux div img{
-    width:100%;
-    vertical-align: middle;
-    border-radius: 0% 45% 45% 0%;
-}
-
-</style>
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
 
 <script type="text/javascript">
     $('div[data-menu]').each(function() {
         $(this).load( $(this).attr('data-menu') + '.html').trigger('create');
     });
+    $('.container-animaux').on('click', function(e) {
+        e.preventDefault();
+        window.location = "./detail-animal.html";
+    });
+    $('.prendRendezvous').on('click', function(e) {
+        e.preventDefault();
+        window.location = "rende-vous.html";
+    });
+
 </script>

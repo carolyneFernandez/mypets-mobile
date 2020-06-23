@@ -39,7 +39,7 @@ nav {
     background-color: #008CBA;
 }
 
-ul a {
+ul li{
     display: block;
     padding: 4%;
     font-size: 1em;
@@ -52,12 +52,6 @@ ul a:hover {
     background: #eee;
 }
 
-/*nav li {
-    float: left;
-    width: 20%;
-    border-right: 1px solid #ddd;
-}
-*/
 nav li:last-child {
     border-right: none;
 }

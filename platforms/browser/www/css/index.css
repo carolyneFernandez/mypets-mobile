@@ -70,12 +70,28 @@ body {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 16px;
     font-weight: normal;
     margin: 0px;
     overflow: visible;
     padding: 0px;
     text-align: center;
+}
+.container{
+    padding: 3% 3%;
+    background:white;
+}
+p{
+    text-align: center;
+    font-size: 12px;
+}
+
+.footer{
+    padding: 3%;
+    background-color: #0687bd;
+}
+.footer p , .footer h1{
+    color: white;
 }
 
 .event {

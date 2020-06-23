@@ -3,21 +3,25 @@ function tryConnection() {
     // var password = document.getElementById(txt-password);
 
     let credentials = {
-        "email": "flodu141@gmail.com",
+        "email": "ca@gmail.com",
         "password": "password"
     }
 
     $.ajax({
+
         type: 'POST',
         url: url + '/api/login',
         data: JSON.stringify(credentials),
         dataType: 'json',
         success: function (data, statut) {
+
             const token = data.token;
-            console.log(token);
+            window.location = "home.html";
+
         },
         error: function (data, statut, error) {
             console.log(data.responseText);
+
         }
     });
     

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mes animaux</title>
+    <meta name="format-detection" content="telephone=yes"/>
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
+    <meta name="msapplication-tap-highlight" content="no"/>
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
+
+</head>
+<body>
+    <div data-menu="templates/menu"></div>
+    <div class="container">
+        <h1>Mes animaux</h1>
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a"><div class="ui-bar" style="height:100px">
+            <img src="img/animals/labrador.jpg" height="100%" width="100%"/>
+            </div></div>
+            <div class="ui-block-d"><div class="ui-bar" style="height:100px">
+                <p> Felix </p>
+                <p>Berger Allemand  </p>
+                <p>56cm</p>
+                <p> 2 ans</p>
+            </div></div>
+        </div><!-- /grid-a -->
+
+        <div class="ui-grid-a">
+                <div class="ui-block-a"><div class="ui-bar" style="height:100px">
+
+            <img src="img/animals/labrador.jpg" height="100%" width="100%"/>
+        </div></div>
+                <div class="ui-block-d"><div class="ui-bar" style="height:100px">
+            <p> Felix </p>
+            <p>  Berger Allemand  </p>
+            <p>56cm</p>
+            <p> 2 ans</p>
+
+
+        </div></div>
+        </div><!-- /grid-a -->
+        <a href="#" data-role="button" class="button" >Prendre un rendez-vous</a>
+
+        <a href="#" data-role="button" class="button">Cliniques à proximité</a>
+
+    </div>
+    <div  class="footer">
+
+        <div class="ui-grid-a">
+            <div class="ui-block-a"><div class="ui-bar" style="height:100px">
+                   <p>felix</p>
+            </div></div>
+            <div class="ui-block-d"><div class="ui-bar" style="height:100px">
+                <p> Le 16/11/2020 à 18h30.</p>
+                <p>    Paris 14ème</p>
+                <p>   9 avenue Gambetta </p>
+            </div></div>
+        </div><!-- /grid-a -->
+    </div>
+
+</body>
+</html>
+<style>
+    img{
+        border-radius: 0% 50% 50% 0%;
+    }
+    .button{
+        background: #F2AF58 !important;
+        color: white !important;
+
+    }
+
+
+</style>
+<script src="js/librarie/jquery-1.11.1.min.js"></script>
+<script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
+
+<script type="text/javascript">
+    $('div[data-menu]').each(function() {
+        $(this).load( $(this).attr('data-menu') + '.html').trigger('create');
+    });
+</script>

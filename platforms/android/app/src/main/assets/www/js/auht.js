@@ -1,12 +1,11 @@
 function tryConnection() {
-    // var login = document.getElementById(txt-email);
-    // var password = document.getElementById(txt-password);
+    var login = document.getElementById("txt-email").value;
+    var password = document.getElementById("txt-password").value;
 
     let credentials = {
-        "email": "ca@gmail.com",
-        "password": "password"
+        "email": login,
+        "password": password
     }
-
     $.ajax({
 
         type: 'POST',
@@ -16,8 +15,9 @@ function tryConnection() {
         success: function (data, statut) {
 
             const token = data.token;
+            console.log(token);
             window.location = "home.html";
-
+            // currentUser = 
         },
         error: function (data, statut, error) {
             console.log(data.responseText);

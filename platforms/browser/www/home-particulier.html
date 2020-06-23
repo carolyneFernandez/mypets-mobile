@@ -15,71 +15,83 @@
 
 </head>
 <body>
+<header style="background:grey">
     <div data-menu="templates/menu"></div>
-    <div class="container">
-        <h1>Mes animaux</h1>
+</header>
 
-        <div class="ui-grid-a">
-            <div class="ui-block-a"><div class="ui-bar" style="height:100px">
-            <img src="img/animals/labrador.jpg" height="100%" width="100%"/>
-            </div></div>
-            <div class="ui-block-d"><div class="ui-bar" style="height:100px">
-                <p> Felix </p>
-                <p>Berger Allemand  </p>
-                <p>56cm</p>
-                <p> 2 ans</p>
-            </div></div>
-        </div><!-- /grid-a -->
 
-        <div class="ui-grid-a">
-                <div class="ui-block-a"><div class="ui-bar" style="height:100px">
+<div class="container ">
 
-            <img src="img/animals/labrador.jpg" height="100%" width="100%"/>
-        </div></div>
-                <div class="ui-block-d"><div class="ui-bar" style="height:100px">
-            <p> Felix </p>
-            <p>  Berger Allemand  </p>
+
+    <h1>Mes animaux</h1>
+    <div class="container-animaux">
+        <div>
+
+            <img src="img/animals/labrador.jpg"/>
+        </div>
+
+        <div>
+            <h1>Felix </h1>
+            <p>Berger Allemand</p>
             <p>56cm</p>
             <p> 2 ans</p>
-
-
-        </div></div>
-        </div><!-- /grid-a -->
-        <a href="#" data-role="button" class="button" >Prendre un rendez-vous</a>
-
-        <a href="#" data-role="button" class="button">Cliniques à proximité</a>
-
-    </div>
-    <div  class="footer">
-
-        <div class="ui-grid-a">
-            <div class="ui-block-a"><div class="ui-bar" style="height:100px">
-                   <p>felix</p>
-            </div></div>
-            <div class="ui-block-d"><div class="ui-bar" style="height:100px">
-                <p> Le 16/11/2020 à 18h30.</p>
-                <p>    Paris 14ème</p>
-                <p>   9 avenue Gambetta </p>
-            </div></div>
-        </div><!-- /grid-a -->
+        </div>
     </div>
 
+    <div class="container-animaux">
+        <div>
+
+            <img src="img/animals/yorshire.jpg"/>
+        </div>
+
+        <div>
+            <h1>Toto </h1>
+            <p>Yorshire Terrier</p>
+            <p>54cm</p>
+            <p> 1 ans</p>
+        </div>
+    </div>
+
+    <button class="button">Prendre un rendez-vous</button>
+    <button class="button">Cliniques à proximité</button>
+
+</div>
+<footer >
+    <div class="container-animaux">
+        <h1 style="margin-bottom: 10%;">Mes rendez-vous</h1>
+
+        <div>
+            <h1>Felix</h1>
+        </div>
+
+        <div>
+            <p> Le 16/11/2020 à 18h30.</p>
+            <p>  Paris 14ème</p>
+            <p>  9 avenue Gambetta </p>
+        </div>
+    </div>
+
+</footer>
 </body>
+
 </html>
 <style>
-    img{
-        border-radius: 0% 50% 50% 0%;
-    }
-    .button{
-        background: #F2AF58 !important;
-        color: white !important;
 
-    }
+.container-animaux div{
+    width:48%; display:inline-block;
+}
+.container-animaux{
+    margin: 5% 0;
 
+}
+.container-animaux div img{
+    width:100%;
+    vertical-align: middle;
+    border-radius: 0% 45% 45% 0%;
+}
 
 </style>
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
-<script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
 
 <script type="text/javascript">
     $('div[data-menu]').each(function() {

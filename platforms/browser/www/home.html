@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8"/>
-    <meta name="format-detection" content="telephone=yes"/>
-    <meta http-equiv="Content-Security-Policy"
-          content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
-    <meta name="msapplication-tap-highlight" content="no"/>
-    <meta name="viewport"
-          content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
-    <title>My pets</title>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <title>My Pets</title>
+
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" href="css/librarie/home.css">
     <link rel="stylesheet" href="css/menu.css">
 
 </head>
+
 <body>
 
     <div data-include="templates/menu"></div>
@@ -22,7 +25,10 @@
     <div class="container">
         <h1>Votre carnée dematiarise</h1>
 
-        <img src="img/laptop.png"/>
+        <!-- Ceci est un exemple  -->
+        <p id="userNom"></p>
+
+        <img src="img/laptop.png" />
         <p>Pour chacuns de vos animaux, plus besoin d’avoir votre carnet de santé physique,
             MyPets se charge de garder les informations santé de vos animaux de compagnie !</p>
 
@@ -35,26 +41,28 @@
     <footer>
         <div>
             <h1>Confirmation du rendez-vous ! </h1>
-            <img src="img/email.png"/>
+            <img src="img/email.png" />
             <p>Votre rendez-vous est confirmé sous 24h, un mail de confirmation
                 vous sera envoyé. Plus qu’à attendre le jour J !</p>
 
         </div>
         <div>
             <h1>Un imprévu ? Pas de soucis !</h1>
-            <img src="img/suprission.png"/>
+            <img src="img/suprission.png" />
             <p>Vous pouvez à tout moment annuler votre rendez-vous
                 si vous avez un imprévu. Tout ça, rapidement et gratuitement !</p>
 
         </div>
     </footer>
 
-</body>
-</html>
+    <script src="js/librarie/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        $('div[data-include]').each(function () {
+            $(this).load($(this).attr('data-include') + '.html').trigger('create');
+        });
 
-<script src="js/librarie/jquery-1.11.1.min.js"></script>
-<script type="text/javascript">
-    $('div[data-include]').each(function() {
-        $(this).load( $(this).attr('data-include') + '.html').trigger('create');
-    });
-</script>
+    </script>
+    <script src="js/fonctions.js"></script>
+</body>
+
+</html>

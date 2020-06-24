@@ -1,22 +1,39 @@
-//var url = "http://192.168.42.112:8030";
-var url = "http://192.168.1.79:8030";
+//A modifier
+var url = "http://172.26.0.1:8030";
 
-function getAnimals() {
+// l'utilisateur est stocké dans currentUser
+var currentUser = JSON.parse(localStorage.getItem('user'));
 
-    animals = currentUSer.animals;
-    
+//Exemple d'utilisation pour affichage dans le HTML 
+if (document.getElementById("userNom")) {
+    document.getElementById("userNom").innerHTML = currentUser.nom;
 }
 
-function getUsers() {
-    $.ajax({
+// function getUsers() {
+//     $.ajax({
 
+//         type: 'GET',
+//         url: url + '/api/proprietaires',
+//         data: "",
+//         dataType: 'json',
+//         success: function (data, statut) {
+//             console.log(data);
+//             var users = data;
+//         },
+//         error: function (data, statut, error) {
+//             console.log(data.responseText);
+//         }
+//     });
+// }
+
+function getProprio(id) {
+    $.ajax({
         type: 'GET',
-        url: url + '/api/proprietaires',
-        data: "",
+        url: url + '/api/proprietaires/' + id,
         dataType: 'json',
+        async: false,
         success: function (data, statut) {
-            console.log(data);
-            const users = data;
+            localStorage.setItem("user", JSON.stringify(data));
         },
         error: function (data, statut, error) {
             console.log(data.responseText);

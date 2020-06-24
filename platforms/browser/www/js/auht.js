@@ -13,16 +13,13 @@ function tryConnection() {
         data: JSON.stringify(credentials),
         dataType: 'json',
         success: function (data, statut) {
-
             const token = data.token;
-            console.log(token);
+            getProprio(data.id);
             window.location = "home.html";
-            // currentUser = 
         },
         error: function (data, statut, error) {
-          //  console.log(data.responseText);
-
+            console.log(data.responseText);
         }
     });
-    
+
 }

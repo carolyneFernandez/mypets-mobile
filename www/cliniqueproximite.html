@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rendez-vous</title>
+    <title>Clinique à proximite</title>
     <meta name="format-detection" content="telephone=yes"/>
     <meta http-equiv="Content-Security-Policy"
           content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
@@ -20,7 +20,9 @@
     <div data-menu="templates/menu"></div>
 </header>
 <div class="container">
-
+    <button id="derrier" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l">
+        Clinique à proximite
+    </button>
     <div class="container-veterinaire">
         <div>
 
@@ -60,26 +62,6 @@
 </body>
 </html>
 
-<style>
-   .container-veterinaire{
-       display: flex;
-       background: #D9DDDE;
-       color: #605858;
-       margin-top: 6%;
-   }
-   .container-veterinaire div{
-       padding: 5% 2%;
-       width: 50%;
-   }
-   .container-veterinaire img{
-       width: 100%;
-       border-radius: 50%;
-   }
-    .container-veterinaire p{
-        font-size: 14px;
-        margin-top: 5%;
-    }
-</style>
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
 <script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
 
@@ -88,8 +70,17 @@
         $(this).load( $(this).attr('data-menu') + '.html').trigger('create');
     });
 
+
+    $('.buttonJeune').on('click', function(e) {
+        e.preventDefault();
+
+
+        window.location = "rende-vous.html";
+    });
+
     $('#derrier').on('click', function(e) {
         e.preventDefault();
-        window.location = "home-particulier.html";
+        window.history.back();
     });
+
 </script>

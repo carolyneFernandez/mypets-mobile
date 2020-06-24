@@ -76,13 +76,12 @@
 
 <style>
     form > div{
-    display: flex !important;
+        display: flex !important;
         justify-content: space-around;
-}
+    }
      form .ui-field-contain>label~[class*=ui-], .ui-field-contain .ui-controlgroup-controls{
         width: 60%;
     }
-
 </style>
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
 <script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
@@ -94,6 +93,11 @@
 
     $('#derrier').on('click', function(e) {
         e.preventDefault();
-        window.location = "home-particulier.html";
+        window.history.back();
     });
+    $('#annulation').on('click', function(e) {
+        e.preventDefault();
+        window.history.back();
+    });
+
 </script>

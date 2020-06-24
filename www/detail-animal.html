@@ -23,7 +23,7 @@
 <div class="container ">
 
 
-    <h1>Detail de Felix</h1>
+    <h1>Détail de Felix</h1>
     <div class="container-animaux">
         <div class="detail">
 
@@ -39,7 +39,7 @@
     </div>
 
     <button class="button prendRendezvous">Prendre un rendez-vous</button>
-    <button class="button">Cliniques à proximité</button>
+    <button class="button cliniqueProximite">Cliniques à proximité</button>
 
 </div>
 <footer >
@@ -62,12 +62,9 @@
             <p>  9 avenue Gambetta </p>
         </div>
         <div>
-            <button class="button" id="annulation">Annulation</button>
+            <button class="button " id="">Annulation</button>
         </div>
     </div>
-
-
-
 
 </footer>
 </body>
@@ -83,5 +80,10 @@
         e.preventDefault();
         window.location = "rende-vous.html";
     });
+    $('.cliniqueProximite').on('click', function(e) {
+        e.preventDefault();
+        window.location = "cliniqueproximite.html";
+    });
+
 
 </script>

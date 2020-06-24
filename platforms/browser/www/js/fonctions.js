@@ -1,4 +1,5 @@
-var url = "http://192.168.42.112:8030";
+//var url = "http://192.168.42.112:8030";
+var url = "http://192.168.1.79:8030";
 
 function getAnimals() {
 

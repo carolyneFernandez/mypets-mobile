@@ -20,7 +20,7 @@
     <div data-menu="templates/menu"></div>
 </header>
 <div class="container">
-    <button class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l">
+    <button id="derrier" class="ui-btn ui-shadow ui-corner-all ui-btn-icon-left ui-icon-carat-l">
         Prendre rendez-vous
     </button>
 
@@ -62,7 +62,7 @@
         </div>
 
         <button class="button" id="soumettre">Soumettre ma demande</button>
-        <button class="button" id="annulation">Annulation</button>
+        <button class="button buttonJeune" id="annulation">Annulation</button>
 
     </form>
     </div>
@@ -92,5 +92,8 @@
         $(this).load( $(this).attr('data-menu') + '.html').trigger('create');
     });
 
-
+    $('#derrier').on('click', function(e) {
+        e.preventDefault();
+        window.location = "home-particulier.html";
+    });
 </script>

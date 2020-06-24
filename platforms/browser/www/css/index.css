@@ -190,10 +190,10 @@ body {
     margin: 16% 0%;
 }
 
-#annulation{
-    background-color: #F2AF58;
-    color: white;
-    margin: 16% 0%;
+.buttonJeune{
+    background-color: #F2AF58 !important;
+    color: white !important;
+    margin: 16% 0% !important;
 
 }
 

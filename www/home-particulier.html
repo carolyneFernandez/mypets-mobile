@@ -52,7 +52,7 @@
     </div>
 
     <button class="button prendRendezvous">Prendre un rendez-vous</button>
-    <button class="button">Cliniques à proximité</button>
+    <button class="button cliniqueProximite">Cliniques à proximité</button>
 
 </div>
 <footer >
@@ -91,6 +91,10 @@
     $('.prendRendezvous').on('click', function(e) {
         e.preventDefault();
         window.location = "rende-vous.html";
+    });
+    $('.cliniqueProximite').on('click', function(e) {
+        e.preventDefault();
+        window.location = "cliniqueproximite.html";
     });
 
 </script>

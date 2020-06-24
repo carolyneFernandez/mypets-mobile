@@ -20,7 +20,7 @@ function tryConnection() {
             // currentUser = 
         },
         error: function (data, statut, error) {
-            console.log(data.responseText);
+          //  console.log(data.responseText);
 
         }
     });

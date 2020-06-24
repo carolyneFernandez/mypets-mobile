@@ -52,7 +52,7 @@
             <p>  9 avenue Gambetta </p>
          </div>
         <div>
-            <button class="button">Annulation</button>
+            <button class="button open">Annulation</button>
         </div>
     </div>
     <div class="container-animaux">
@@ -62,14 +62,60 @@
             <p>  9 avenue Gambetta </p>
         </div>
         <div>
-            <button class="button " id="">Annulation</button>
+            <button class="button  open" id="">Annulation</button>
         </div>
     </div>
 
 </footer>
+
+<!--Creates the popup body-->
+<div class="popup-overlay">
+    <!--Creates the popup content-->
+    <div class="popup-content">
+        <h1> Êtes-vous sûr d'annuler votre rendez-vous?</h1>
+        <!--popup's close button-->
+        <button class=" button close">Oui</button>
+
+        <button class="button  close">Non</button>
+
+    </div>
+</div>
+
 </body>
 
 </html>
+<style>
+    .popup-overlay {
+        /*Hides pop-up when there is no "active" class*/
+        visibility: hidden;
+        position: absolute;
+        background: #ffffff;
+        border: 3px solid #0687bd;
+        width: 50%;
+        margin: 50% auto;
+        left: 25%;
+    }
+
+    .popup-overlay.active {
+        /*displays pop-up when "active" class is present*/
+        visibility: visible;
+        text-align: center;
+    }
+
+    .popup-content {
+        /*Hides pop-up content when there is no "active" class */
+        visibility: hidden;
+    }
+
+    .popup-content.active {
+        /*Shows pop-up content when "active" class is present */
+        visibility: visible;
+        padding: 8%
+
+    }
+
+
+</style>
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
 
 <script type="text/javascript">
@@ -84,6 +130,14 @@
         e.preventDefault();
         window.location = "cliniqueproximite.html";
     });
+    //appends an "active" class to .popup and .popup-content when the "Open" button is clicked
+    $(".open").on("click", function() {
+        $(".popup-overlay, .popup-content").addClass("active");
+    });
 
+    //removes the "active" class to .popup and .popup-content when the "Close" button is clicked
+    $(".close, .popup-overlay").on("click", function() {
+        $(".popup-overlay, .popup-content").removeClass("active");
+    });
 
 </script>

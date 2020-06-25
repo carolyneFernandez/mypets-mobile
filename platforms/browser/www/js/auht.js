@@ -6,6 +6,7 @@ function tryConnection() {
         "email": login,
         "password": password
     }
+
     $.ajax({
 
         type: 'POST',
@@ -15,10 +16,12 @@ function tryConnection() {
         success: function (data, statut) {
             const token = data.token;
             getProprio(data.id);
+
             window.location = "home.html";
         },
         error: function (data, statut, error) {
             console.log(data.responseText);
+
         }
     });
 

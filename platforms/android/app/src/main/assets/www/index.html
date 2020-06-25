@@ -9,95 +9,109 @@
     <meta name="msapplication-tap-highlight" content="no"/>
     <meta name="viewport"
           content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
-    <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <title>My Pets</title>
     <script src="js/fonctions.js"></script>
-    <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
+    <link rel="stylesheet" href="css/librarie/bootstrap.css">
+
 </head>
 <body>
 
-<div class="login" data-role="page">
+<div class="container-fluid" id="login">
 
-    <div>
 
-        <div class="header-login">
 
-            <img src="img/mypets_logo2.png" style="width: 40%;"/>
+    <div class="text-center">
+        <img src="img/homepage/mypets_logo_background.png" alt="" class="img-responsive">
+    </div>
+    <!--Grid row-->
+    <div class="row d-flex justify-content-center text-center">
 
-        </div><!-- /header -->
+        <!--Grid column-->
+        <div class="col-lg-12 col-md-12 col-sm-6">
 
-        <div role="main" class="ui-content contentLogin">
-            <label for="txt-email">Email</label>
+            <form class="needs-validation" novalidate >
+                <div class="form-group row">
+                    <div class="col-md-10 col-sm-10 m-md-auto">
+                        <input type="email" class="form-control" id="txt-email" name="txt-email" required placeholder="Email" value="ca@gmail.com">
+                        <div class="invalid-feedback">
+                            Veuillez fournir un email valide
+                        </div>
+                    </div>
+                </div>
 
-            <input type="text" name="txt-email" id="txt-email" value="">
+                <div class="form-group row">
 
-            <label for="txt-password">Mot de passe</label>
+                    <div class="col-md-10 col-sm-10  m-md-auto">
+                        <input type="password" class="form-control" id="txt-password" name="txt-password" required placeholder="Password" value="password">
+                        <div class="invalid-feedback">
+                            Veuillez fournir un mot de passe valide
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row">
 
-            <input type="password" name="txt-password" id="txt-password" value="">
+                    <div class="custom-control custom-checkbox col-md-10 d-inline-flex justify-content-between m-auto">
+                        <div class="col-md-6 d-inline">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label text-light" for="customControlInline">Se souvenir</label>
+                        </div>
+                        <div class="col-md-6 d-inline">
+                            <button type="button" class="btn   btn-success rounded-pill "  data-position-to="window" onclick="tryConnection()">
+                                Se connecter
+                            </button>
 
-            <fieldset data-role="controlgroup">
+                        </div>
 
-                <input type="checkbox" name="chck-rememberme" id="chck-rememberme" checked="">
+                    </div>
+                </div>
+            </form>
 
-                <label for="chck-rememberme">Se souvenir</label>
-
-            </fieldset>
-
-            <button type="button" data-position-to="window" id="btn-submit" onclick="tryConnection()" class="ui-btn ui-btn-b ui-corner-all mc-top-margin-1-5">Se connecter</button>
-
-         <!--   <p class="mc-top-margin-1-5"><a href="begin-password-reset.html">Mot de passe oublié ?</a></p>-->
-
-        </div><!-- /content -->
-
+        </div>
+        <!--Grid column-->
 
     </div>
+</div>
 
 
-</div><!-- /page -->
-
-<div class="bar bar-header bar-positive" > </div>
+</body>
 <style>
-    /****LOgin*********/
-
-    .login{
-        background-color: #008CBA;
+    #login{
+        background-color: #008cba;
+    }
+    .invalid-feedback{
+        color: white !important;
     }
 
-    .header-login{
-
-        width: 100%;
-        height: 300px;
-        line-height:400px;
-        margin:0px auto;
-        text-align:center;
-
-    }
-    .contentLogin{
-        padding: 0% 10%;
-        color: white;
-    }
 </style>
-<script src="js/librarie/jquery-1.11.1.min.js"></script>
-<script src="js/librarie/jquery-1.5.0.mobile.min.js"></script>
+
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/auht.js"></script>
+<script src="js/librarie/jquery-1.11.1.min.js"></script>
+<script src="js/librarie/bootstrap.js"></script>
+
 <script type="text/javascript">
 
-    $('div[data-include]').each(function() {
-        $(this).load( $(this).attr('data-include') + '.html').trigger('create');
-    });
-
-    $(document).ready(function(){
-
+    (function() {
         var height = $(window).height();
 
-        $('.login').height(height);
-
-        var heightLogin = $(window).height()/3;
-
-        $('.header-login').height(heightLogin);
-    });
+        $('#login').height(height);
+       /* 'use strict';
+        window.addEventListener('load', function() {
+            // Get the forms we want to add validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);*/
+    })();
 
 </script>
 

@@ -11,57 +11,131 @@
         content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
     <title>My Pets</title>
 
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" href="css/librarie/home.css">
-    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/librarie/bootstrap.css">
+    <link rel="stylesheet" href="css/librarie/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/index.css">
 
 </head>
 
 <body>
 
-    <div data-include="templates/menu"></div>
+<div data-include="templates/menu"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container home mb-4">
+                <div class="row col-12">
+                    <!-- Ceci est un exemple  -->
+                    <p id="userNom"></p>
 
+                    <div class="col-12 mt-4" >
+                        <h3 >Votre carnée dematiarise</h3>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center mb-4">
+                        <img src="img/svg/manual-book.svg"  class="img-fluid rounded d-block"/>
 
-    <div class="container">
-        <h1>Votre carnée dematiarise</h1>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center mb-4">
+                        <img src="img/svg/arrow-right-solid.svg"  class="img-fluid rounded d-block" />
+                    </div>
+                    <div class="col-4 d-flex justify-content-center mb-4">
+                        <img src="img/svg/laptop.svg"  class="img-fluid rounded d-block " />
+                    </div>
+                    <div class="col-12 mt-4" >
+                        <p>Pour chacuns de vos animaux, plus besoin d’avoir votre carnet de santé physique,
+                            MyPets se charge de garder les informations santé de vos animaux de compagnie !</p>
+                    </div>
 
-        <!-- Ceci est un exemple  -->
-        <p id="userNom"></p>
+                    <div class="col-12 mt-4" >
+                        <h3>Vou pouvez prendre rendez-vous ! </h3>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center mb-4">
+                        <img src="img/svg/manual-book.svg"  class="img-fluid rounded d-block"/>
 
-        <img src="img/laptop.png" />
-        <p>Pour chacuns de vos animaux, plus besoin d’avoir votre carnet de santé physique,
-            MyPets se charge de garder les informations santé de vos animaux de compagnie !</p>
+                    </div>
+                    <div class="col-4 d-flex justify-content-center mb-4">
+                        <img src="img/svg/arrow-right-solid.svg"  class="img-fluid rounded d-block" />
+                    </div>
+                    <div class="col-4 d-flex justify-content-center mb-4">
+                        <img src="img/svg/vet.svg"  class="img-fluid rounded d-block"/>
 
-        <h1>Vou pouvez prendre rendez-vous ! </h1>
-        <img src="img/doctor.png" />
+                    </div>
+                    <div class="col-12 mt-4" >
+                        <p> En plus d’avoir vos carnets de santé sur notre plateforme vous pouvez aussi prendre
+                            rendez-vous avec les vétérinaires les plus proche de chez vous gratuitement.</p>
+                    </div>
 
-        <p>En plus d’avoir vos carnets de santé sur notre plateforme vous pouvez aussi
-            prendre rendez-vous avec les vétérinaires les plus proche de chez vous gratuitement.</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <footer>
-        <div>
-            <h1>Confirmation du rendez-vous ! </h1>
-            <img src="img/email.png" />
-            <p>Votre rendez-vous est confirmé sous 24h, un mail de confirmation
-                vous sera envoyé. Plus qu’à attendre le jour J !</p>
+
+
+    <div class="jumbotron footer">
+        <div class="row m-auto">
+            <div class="col-12 mt-4" >
+                <h3>Confirmation du rendez-vous ! </h3>
+            </div>
+
+            <div class="col-4 d-flex justify-content-center mb-4">
+
+                <img src="img/svg/vet.svg"  class="img-fluid rounded d-block"/>
+
+            </div>
+            <div class="col-4 d-flex justify-content-center mb-4">
+
+                <img src="img/svg/arrow-right-solid-white.svg"  class="img-fluid rounded d-block "  />
+
+            </div>
+            <div class="col-4 d-flex justify-content-center mb-4">
+                <img src="img/svg/person.svg"  class="img-fluid rounded d-block"/>
+            </div>
+            <div class="mt-auto" >
+                <p>
+                    Pour chacuns de vos animaux, plus besoin d’avoir votre carnet de santé physique,
+                    MyPets se charge de garder les informations santé de vos animaux de compagnie !
+                </p>
+            </div>
+
+            <div class="col-12 mt-4" >
+                <h3>Un imprévu ? Pas de soucis ! </h3>
+            </div>
+            <div class="col-4 d-flex justify-content-center mb-4">
+
+                <img src="img/svg/person.svg"  class="img-fluid rounded d-block"/>
+
+            </div>
+            <div class="col-4 d-flex justify-content-center mb-4">
+
+                <img src="img/svg/arrow-right-solid-white.svg"  class="img-fluid rounded d-block " />
+
+            </div>
+            <div class="col-4 d-flex justify-content-center mb-4">
+                <img src="img/svg/times-solid.svg"  class="img-fluid rounded d-block"/>
+            </div>
+            <div class="m-auto mt-4" >
+                <p>
+                    Vous pouvez à tout moment annuler votre rendez-vous si vous avez un imprévu.
+                    Tout ça, rapidement et gratuitement !
+                </p>
+            </div>
+
 
         </div>
-        <div>
-            <h1>Un imprévu ? Pas de soucis !</h1>
-            <img src="img/suprission.png" />
-            <p>Vous pouvez à tout moment annuler votre rendez-vous
-                si vous avez un imprévu. Tout ça, rapidement et gratuitement !</p>
-
-        </div>
-    </footer>
+    </div>
 
     <script src="js/librarie/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript">
-        $('div[data-include]').each(function () {
-            $(this).load($(this).attr('data-include') + '.html').trigger('create');
-        });
-    </script>
+
     <script src="js/fonctions.js"></script>
 </body>
 
 </html>
+<script src="js/librarie/jquery-1.11.1.min.js"></script>
+<script src="js/librarie/bootstrap.js"></script>
+
+<script type="text/javascript">
+    $('div[data-include]').each(function() {
+        $(this).load( $(this).attr('data-include') + '.html').trigger('create');
+    });
+
+</script>

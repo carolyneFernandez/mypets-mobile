@@ -1,5 +1,5 @@
 //A modifier
-var url = "http://192.168.1.79:8030";
+var url = "http://172.21.0.1:8030";
 
 // l'utilisateur est stocké dans currentUser
 var currentUser = JSON.parse(localStorage.getItem('user'));
@@ -8,23 +8,6 @@ var currentUser = JSON.parse(localStorage.getItem('user'));
 if (document.getElementById("userNom")) {
     document.getElementById("userNom").innerHTML = currentUser.nom;
 }
-
-// function getUsers() {
-//     $.ajax({
-
-//         type: 'GET',
-//         url: url + '/api/proprietaires',
-//         data: "",
-//         dataType: 'json',
-//         success: function (data, statut) {
-//             console.log(data);
-//             var users = data;
-//         },
-//         error: function (data, statut, error) {
-//             console.log(data.responseText);
-//         }
-//     });
-// }
 
 function getProprio(id) {
     $.ajax({

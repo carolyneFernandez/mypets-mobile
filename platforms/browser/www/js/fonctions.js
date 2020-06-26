@@ -163,6 +163,10 @@ function getRendeVous(api){
 }
 
 
+
+
+
+
 // function getUsers() {
 //     $.ajax({
 
@@ -182,7 +186,7 @@ function getRendeVous(api){
 
 
 function getClinique(api){
-
+    console.log(url + api);
     $.ajax({
         type: 'GET',
         url: url + api,

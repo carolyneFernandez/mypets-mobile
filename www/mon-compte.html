@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src * 'unsafe-eval' 'unsafe-inline'; img-src 'self' data:">
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport"
+        content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <title>My pets</title>
+
+    <link rel="stylesheet" href="css/librarie/bootstrap.css">
+    <link rel="stylesheet" href="css/librarie/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/librarie/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="css/librarie/jquery-1.5.0.mobile.min.css">
+
+</head>
+<style>
+    #formRendevous div {
+        margin: 0;
+        padding: 0;
+        justify-content: space-evenly;
+    }
+</style>
+
+<body>
+
+    <div data-include="templates/menu"></div>
+
+    <div class="container-fluid justify-content-center">
+        <h3 id="title">Mon compte</h3>
+
+        <button type="button" class="btn btn-danger" onclick="javascript:history.back()">Retour</button>
+
+        <br>
+        <br>
+        <form class="justify-content-center" action="javascript:Enregistrer();">
+            <div class="form-group">
+                <label for="nom">Nom</label>
+                <input type="text" class="form-control" id="nom" placeholder="Entrer nom" required>
+            </div>
+            <div class="form-group">
+                <label for="prenom">Prénom</label>
+                <input type="text" class="form-control" id="prenom" placeholder="Entrer prenom" required>
+            </div>
+            <div class="form-group">
+                <label for="mail">Email</label>
+                <input type="email" class="form-control" id="mail" placeholder="Entrer email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Nouveau mot de passe</label>
+                <input type="password" class="form-control" id="password" placeholder="Nouveau mot de passe">
+            </div>
+            <div class="form-group">
+                <label for="password-confirmation">Confirmez le mot de passe</label>
+                <input type="password" class="form-control" id="password-confirmation" value="">
+            </div>
+            <div class="form-group">
+                <label for="image">Avatar</label>
+                <input type="file" class="form-control" id="image" accept="image/*" />
+            </div>
+            <div class="form-group">
+                <label for="adresse">Adresse</label>
+                <input type="textarea" class="form-control" id="adresse" required>
+            </div>
+            <div class="form-group">
+                <label for="naissance">Date de naissance</label>
+                <input type="date" class="form-control" id="naissance">
+            </div>
+            <div class="form-group">
+                <label for="telephone">Téléphone</label>
+                <input type="text" class="form-control" id="telephone">
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="text" class="form-control" id="mobile" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Enregistrer</button>
+        </form>
+        <br>
+    </div>
+
+
+
+    <script src="js/librarie/jquery-1.11.1.min.js"></script>
+    <script src="js/librarie/bootstrap.js"></script>
+    <script src="js/fonctions.js"></script>
+    <script src="js/mon-compte.js"></script>
+    <script type="text/javascript">
+        $('div[data-include]').each(function () {
+            $(this).load($(this).attr('data-include') + '.html').trigger('create');
+        });
+        var height = $(window).height();
+        $('.container-fluid').height(height);
+    </script>
+
+</body>
+
+</html>

@@ -8,7 +8,6 @@ function tryConnection() {
     }
 
     $.ajax({
-
         type: 'POST',
         url: url + '/api/login',
         data: JSON.stringify(credentials),
@@ -20,7 +19,6 @@ function tryConnection() {
         },
         error: function (data, statut, error) {
             console.log(data.responseText);
-
         }
     });
 }

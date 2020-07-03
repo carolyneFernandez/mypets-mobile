@@ -38,7 +38,12 @@
         <div class="col-lg-12 col-md-12 col-sm-6">
             <form class="needs-validation" id="formEditAnimaux" action="javascript:Enregistrer();">
                 <input class="form-control" hidden id="txt-id" type="number">
-
+                <div class="form-group row mt-4">
+                    <label for="txt-user" class="col-4 col-form-label">Propietaire</label>
+                    <div class="col-8 d-flex justify-content-start">
+                        <input class="form-control" id="txt-user" type="text" disabled>
+                    </div>
+                </div>
                 <div class="form-group row mt-4">
                     <label for="txt-name" class="col-4 col-form-label">Animal</label>
                     <div class="col-8 d-flex justify-content-start">
@@ -123,6 +128,7 @@
 
                 </div>
 
+
                 <div class="form-group row mt-4">
                     <div class="col-sm-10">
                         <button type="submit" class="btn btn-primary">Enregistrer</button>
@@ -139,6 +145,8 @@
 </div>
 
 </body>
+
+
 </html>
 <script src="js/librarie/jquery-1.11.1.min.js"></script>
 <script src="js/librarie/bootstrap.js"></script>

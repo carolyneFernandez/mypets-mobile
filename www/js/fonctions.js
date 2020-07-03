@@ -24,7 +24,7 @@ if (document.getElementById("formEditAnimaux")) {
 
 function getAnimalId(id){
     localStorage.setItem("animal", "/api/animals/"+id);
-    window.location="../detail-animal.html";
+     window.location="detail-animal.html";
 }
 
 function getProprio(id) {
@@ -60,8 +60,9 @@ function getUserAnimals(id) {
     });
 }
 
+
 function edit(){
-    window.location="../editAnimal.html";
+    window.location="editAnimal.html";
 }
 function getAnimal(api) {
     $.ajax({
@@ -147,7 +148,7 @@ function getRendeVous(api){
             var date = new Date(JSON.parse(JSON.stringify(data["date"])));
 
             var day=date.getUTCDate();
-            var month= date.getUTCMonth();
+            var month= date.getUTCMonth()+1;
             var year=date.getUTCFullYear();
             var hours=date.getUTCHours();
             var minuts =date.getUTCMinutes() !=0?date.getUTCMinutes():"";
@@ -158,7 +159,6 @@ function getRendeVous(api){
              divTexte.appendChild(ul);
             document.getElementById("footer").appendChild(divTexte);
 
-
         },
         error: function (data, statut, error) {
 
@@ -166,10 +166,6 @@ function getRendeVous(api){
         }
     });
 }
-
-
-
-
 
 /*List tout les animaux*/
 function getTypeAnimal(){
@@ -215,7 +211,6 @@ function editAnimal(apiAnimal){
           async: false,
           success: function (data, statut) {
               //Pré-remplissage des informations du animaux
-              console.log(data["dateDeces"]);
               var dateNaissance=new Date(JSON.parse(JSON.stringify(data["dateNaissance"])));
               var month = ("0" + (dateNaissance.getUTCMonth()+1)).slice(-2);
               var day =("0" + (dateNaissance.getUTCDate())).slice(-2);
@@ -236,6 +231,8 @@ function editAnimal(apiAnimal){
                   document.getElementById("txt-causeDece").value =  "";
 
               }
+              document.getElementById("txt-user").value = currentUser.nom;
+
               document.getElementById("txt-id").value = data['id'];
               document.getElementById("txt-name").value = data['nom'];
               document.getElementById("date-naissance").value =date;
@@ -246,24 +243,22 @@ function editAnimal(apiAnimal){
               document.getElementById("txt-traitements").value = data['traitements'];
               document.getElementById("checkDece").checked = data['decede'];
               document.getElementById("txt-dateDece").value = dateDece;
-
               let listtypeAnimal=getTypeAnimal();
               let typeAnimaux=document.getElementById("txt-typeAnimaux");
               let typeAnimalId=getTypeAnimalId(data["type"]);
 
-                   for(var i= 0; i <listtypeAnimal.length; i++) {
-                       var typeOption =document.createElement('option');
-                       typeOption.text = listtypeAnimal[i].nom;
-                       typeOption.value = "/api/animal_types/"+listtypeAnimal[i].id;
-                       typeAnimaux.appendChild(typeOption);
+               for(var i= 0; i <listtypeAnimal.length; i++) {
+                   var typeOption =document.createElement('option');
+                   typeOption.text = listtypeAnimal[i].nom;
+                   typeOption.value = "/api/animal_types/"+listtypeAnimal[i].id;
+                   typeAnimaux.appendChild(typeOption);
 
-                       if(JSON.stringify(typeAnimalId) === JSON.stringify(listtypeAnimal[i])){
-                           valeurIndexAnimaux=i;
-                       }
-
+                   if(JSON.stringify(typeAnimalId) === JSON.stringify(listtypeAnimal[i])){
+                       valeurIndexAnimaux=i;
                    }
-              typeAnimaux.selectedIndex = valeurIndexAnimaux;
 
+               }
+              typeAnimaux.selectedIndex = valeurIndexAnimaux;
 
           },
           error: function (data, statut, error) {
@@ -287,27 +282,23 @@ function Enregistrer() {
     let dateDece=document.getElementById("txt-dateDece").value;
     let causeDece =document.getElementById("txt-causeDece").value;
     let idAnimaux= document.getElementById("txt-id").value;
-    console.log("TYPO DE ANIMAL:");
-    console.log(typeAnimaux);
+    let avatar= document.getElementById("txt-id").value;
+
     let animauxValues =
         {
             "id":idAnimaux,
-          "type":typeAnimaux,
-
-       /*     "id":idAnimaux,
+            "type":typeAnimaux,
             "nom": nomAnimaux,
-           "dateNaissance": dateNaissance,
+            "dateNaissance": dateNaissance,
             "race": race,
             "puce": puce,
-
             "infosPere":infoPere,
             "infosMere": infoMere,
-          //  "decede": decede,
+            "decede": decede,
             "causeDeces": causeDece,
             "dateDeces": dateDece,
-            "traitements":traitement*/
+            "traitements":traitement
         }
-
         $.ajax({
             type: 'PUT',
             url: url +'/api/animals/'+idAnimaux,
@@ -319,36 +310,14 @@ function Enregistrer() {
             dataType: 'json',
             async: false,
             success: function (data, statut) {
-                alert("as");
-             //   window.location = "../home-particulier.html";
-              //  console.log(animauxValues);
 
-                //  console.log(data);
+                window.location = "home-particulier.html";
+
             },
             error: function (data, statut, error) {
-               // console.log(data.responseText);
-
-                alert("no entra");
+                 console.log(data.responseText);
             }
         });
 
 
 }
-
-
-// function getUsers() {
-//     $.ajax({
-
-//         type: 'GET',
-//         url: url + '/api/proprietaires',
-//         data: "",
-//         dataType: 'json',
-//         success: function (data, statut) {
-//             console.log(data);
-//             var users = data;
-//         },
-//         error: function (data, statut, error) {
-//             console.log(data.responseText);
-//         }
-//     });
-// }

@@ -14,8 +14,9 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent22">
             <ul class="navbar-nav mr-auto navbar_menu">
-                <li class="m-auto">CLINIQUES À PROXIMITÉ</li>
+               <!-- <li class="m-auto">CLINIQUES À PROXIMITÉ</li> -->
                 <li class="compte m-auto ">MON COMPTE</li>
+                <li class="logOut m-auto ">Se déconnecter</li>
             </ul>
         </div>
     </nav>
@@ -32,6 +33,11 @@
         $('.home').on('click', function(e) {
             e.preventDefault();
             window.location = "./home-particulier.html";
+        });
+        $('.logOut').on('click', function(e) {
+            localStorage.removeItem("user");
+            e.preventDefault();
+            window.location = "./index.html";
         });
 
         $('.third-button').on('click', function () {

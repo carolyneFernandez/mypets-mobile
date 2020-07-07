@@ -11,7 +11,7 @@ if (currentUser.mobile !== null) {
     document.getElementById("mobile").defaultValue = currentUser.mobile;
 }
 
-function Enregistrer() {
+function EnregistrerCompte() {
     if (document.getElementById("password").value == document.getElementById("password-confirmation").value) {
 
         let nom = document.getElementById("nom").value;

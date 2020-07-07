@@ -84,11 +84,11 @@ function EnregistrerRDV() {
     let rdv = {
         "veterinaire": animal.veterinaireHabituel,
         "animal": '/api/animals/' + document.getElementById('txt-animal').value,
-        "date": document.getElementById('dateRendezvous').value,
+        "date": new Date(JSON.parse(JSON.stringify(document.getElementById('dateRendezvous').value))),
         "observations": document.getElementById('txt-note').value,
         "domicile": false,
         "urgence": false,
-        "consultation": "string",
+        "consultation": "",
         "completed": true,
         "proprietaire": '/api/proprietaires/'+ currentUser.id,
         "valide": false,
@@ -110,7 +110,6 @@ function EnregistrerRDV() {
             window.location = "home-particulier.html";
         },
         error: function (data, statut, error) {
-            console.log('putain')
             console.log(data.responseText);
         }
     });

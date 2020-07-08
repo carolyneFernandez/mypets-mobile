@@ -81,21 +81,34 @@ function EnregistrerRDV() {
             console.log(data.responseText);
         }
     });
+    var veto;
+    $.ajax({
+        type: 'GET',
+        url: url + animal.veterinaireHabituel,
+        dataType: 'json',
+        async: false,
+        success: function (data, statut) {
+            veto = data;
+            return veto;
+        },
+        error: function (data, statut, error) {
+            console.log(data.responseText);
+        }
+    });
     let rdv = {
         "veterinaire": animal.veterinaireHabituel,
         "animal": '/api/animals/' + document.getElementById('txt-animal').value,
-        "date": new Date(JSON.parse(JSON.stringify(document.getElementById('dateRendezvous').value))),
+        "date": document.getElementById('dateRendezvous').value + " "
+        + document.getElementById('heureRendezvous').value,
         "observations": document.getElementById('txt-note').value,
         "domicile": false,
         "urgence": false,
-        "consultation": "",
         "completed": true,
         "proprietaire": '/api/proprietaires/'+ currentUser.id,
         "valide": false,
         "author": '/api/proprietaires/'+ currentUser.id,
-        "clinique": animal.veterinaireHabituel.clinique
+        "clinique": veto.clinique
     }
-
     $.ajax({
         type: 'POST',
         url: url + '/api/rdvs',

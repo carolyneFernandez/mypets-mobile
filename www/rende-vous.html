@@ -40,7 +40,7 @@
 
             <!--Grid column-->
             <div class="col-lg-12 col-md-12 col-sm-6">
-                <form class="needs-validation" id="formRendevous"  action="javascript:EnregistrerRDV();">
+                <form class="needs-validation" id="formRendevous" action="javascript:EnregistrerRDV();">
                     <div class="form-group row mt-4">
                         <label for="txt-animal" class="col-4 col-form-label">Animal</label>
                         <div class="col-8">
@@ -52,7 +52,8 @@
                     <div class="form-group row mt-4">
                         <label for="dateRendezvous" class="col-4 col-form-label">Date</label>
                         <div class="col-8 d-flex justify-content-start">
-                            <input type="date" id="dateRendezvous" name="date RDV">
+                            <input type="date" id="dateRendezvous" name="date RDV" required>
+                            <input type="time" id="heureRendezvous" name="Heure RDV" min="09:00" max="18:00" required>
                         </div>
                     </div>
 
@@ -60,7 +61,7 @@
                         <label for="s-veterinaire" class="col-4 col-form-label">Veterinaire</label>
                         <div class="col-8">
                             <select class="form-control" id="s-veterinaire" name="s-veterinaire">
-                                
+
                             </select>
                         </div>
                     </div>
@@ -70,7 +71,6 @@
                             <textarea class="form-control rounded-0" id="txt-note" rows="3"></textarea>
                         </div>
                     </div>
-
 
                     <div class="form-group row mt-4">
                         <div class="col-sm-10">
@@ -87,13 +87,14 @@
 
     </div>
 
+    <script src="js/librarie/jquery-1.11.1.min.js"></script>
+    <script src="js/librarie/bootstrap.js"></script>
+    <script src="js/fonctions.js"></script>
+    <script src="js/rdv.js"></script>
+
 </body>
 
 </html>
-<script src="js/librarie/jquery-1.11.1.min.js"></script>
-<script src="js/librarie/bootstrap.js"></script>
-<script src="js/fonctions.js"></script>
-<script src="js/rdv.js"></script>
 
 <script type="text/javascript">
 

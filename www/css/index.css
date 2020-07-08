@@ -401,6 +401,12 @@ color: white}
     color: #008CBA;
 }
 
+.valide {
+    color: rgb(61, 243, 61);
+}
+.non-valide {
+    color: rgb(255, 30, 30);
+}
 /****
 body {
     margin:0;

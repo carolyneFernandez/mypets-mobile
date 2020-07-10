@@ -1,5 +1,5 @@
 //A modifier
-var url = "http://192.168.1.48:8030";
+var url = "http://192.168.43.50:8030";
 
 // l'utilisateur est stocké dans currentUser
 var currentUser = JSON.parse(localStorage.getItem('user'));
